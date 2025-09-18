@@ -123,6 +123,15 @@ export const getTimeZone = (): string => Localization.getCalendars()[0]?.timeZon
 /**
  * @public
  * @author Marc Stöckli - Codemize GmbH 
+ * @description Returns the first week day based on localization
+ * @since 0.0.1
+ * @version 0.0.1
+ * @function */
+export const getFirstWeekDay = (): number => Localization.getCalendars()[0]?.firstWeekday || 0;
+
+/**
+ * @public
+ * @author Marc Stöckli - Codemize GmbH 
  * @description Returns time zone abbrevation based on localization
  * @since 0.0.1
  * @version 0.0.1
@@ -130,7 +139,7 @@ export const getTimeZone = (): string => Localization.getCalendars()[0]?.timeZon
 export const getTimeZoneAbbrevation = ({
   now = new Date()
 }: TimeZoneAbbrevationProps): string|undefined => now.toLocaleString([getLocalization().code], {
-  timeZoneName: "longOffset"
+  timeZoneName: "shortOffset"
 })?.split(' ')?.pop();
 
 /**

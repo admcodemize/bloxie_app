@@ -12,3 +12,22 @@ export const PLATFORM = <PlatformProps>{
   android: "android",
   web: "web"
 }
+
+/**
+ * @public
+ * @author Marc Stöckli - Codemize GmbH 
+ * @readonly
+ * @since 0.0.1
+ * @version 0.0.1
+ * @constant */
+export const VALID_TIMEZONES = <string[]>[
+  "America",
+  "Europe",
+  "Asia",
+  "Africa",
+  "Australia",
+  "Antarctica",
+  "Pacific", 
+  "Indian", 
+  "Atlantic"
+];

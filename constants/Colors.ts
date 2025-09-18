@@ -38,7 +38,7 @@ export const COLORS = {
     warning: "#D76F00",
     information: "#0092F9",
     primaryBg: "#15151D",
-    secondaryBg: "#1C1C24",
+    secondaryBg: "#181820",
     tertiaryBg: "#232429",
     primaryBorder: "#282a33",
     primaryIcon: "#626D7B",

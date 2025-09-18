@@ -2,6 +2,7 @@ import { SheetSize, TrueSheet } from "@lodev09/react-native-true-sheet";
 import React, { PropsWithChildren } from "react";
 import { View } from "react-native";
 
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faXmark } from "@fortawesome/duotone-thin-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
@@ -24,6 +25,7 @@ import GlobalTypographyStyle from "@/styles/GlobalTypography";
 export type BottomSheetProps = PropsWithChildren & {
   name: string;
   title?: string;
+  icon?: IconProp;
   size?: SheetSize[] | undefined;
   cornerRadius?: number;
 }
@@ -36,6 +38,7 @@ export type BottomSheetProps = PropsWithChildren & {
  * @param {Object} param0 - Handles the styling and activity of an icon based button
  * @param {string} param0.name - The name of the sheet
  * @param {string} param0.title - The title of the sheet
+ * @param {IconProp} param0.icon - The icon of the sheet
  * @param {heetSize[]|undefined} param0.size - The size of the sheet
  * @param {number} param0.cornerRadius - The corner radius of the sheet
  * @param {ReactNode|undefined} param0.children - Represents all of the things React can render.
@@ -43,11 +46,12 @@ export type BottomSheetProps = PropsWithChildren & {
 const BottomSheet = ({
   name,
   title,
+  icon,
   size = ["auto"],
   cornerRadius = 0,
   children,
 }: BottomSheetProps) => {
-  const { primaryBgColor, primaryBorderColor } = useThemeColors();
+  const { primaryBgColor, primaryBorderColor, primaryIconColor } = useThemeColors();
 
   /**
    * @description Handles the on press event for the dismiss sheet
@@ -58,23 +62,29 @@ const BottomSheet = ({
     <TrueSheet
       edgeToEdge
       name={name}
+      backgroundColor={primaryBgColor}
+      sizes={size}
+      cornerRadius={cornerRadius}
+      contentContainerStyle={{ paddingBottom: 40 }}
       style={{ 
         borderTopWidth: 1, 
         backgroundColor: primaryBgColor, 
         borderTopColor: primaryBorderColor 
-      }}
-      contentContainerStyle={{ paddingBottom: 40 }}
-      backgroundColor={primaryBgColor}
-      sizes={size}
-      cornerRadius={cornerRadius}>
+      }}>
         <ViewBase>
           <View style={[GlobalContainerStyle.rowCenterBetween, { 
             padding: STYLES.paddingVertical - 4,
           }]}>
-            <View>
-              {title && <TextBase style={[GlobalTypographyStyle.standardText, { 
-                padding: STYLES.paddingVertical + 4,
-              }]}>{title}</TextBase>}
+            <View style={[GlobalContainerStyle.rowCenterStart, { 
+              padding: STYLES.paddingVertical + 4,
+            }]}>
+              {icon && <FontAwesomeIcon
+                icon={icon as IconProp}
+                size={STYLES.sizeFaIcon}
+                color={primaryIconColor} />}  
+              {title && <TextBase 
+                text={title}
+                style={[GlobalTypographyStyle.standardText]} />}
             </View>
             <TouchableHapticIcon
               hideBorder

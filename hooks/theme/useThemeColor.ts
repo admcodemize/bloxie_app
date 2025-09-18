@@ -47,6 +47,7 @@ export const useThemeColors = () => {
   const primaryBorderColor = useThemeColor("primaryBorder");
   const primaryIconColor = useThemeColor("primaryIcon");
   const info = useThemeColor("info");
+  const text = useThemeColor("text");
 
   return {
     primaryBgColor,
@@ -54,6 +55,7 @@ export const useThemeColors = () => {
     tertiaryBgColor,
     primaryBorderColor,
     primaryIconColor,
-    info
+    info,
+    text
   }
 }

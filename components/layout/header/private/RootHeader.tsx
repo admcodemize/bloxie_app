@@ -114,9 +114,7 @@ const RootHeader = ({
               icon={ROUTES_PRIVATE_HEADER.find(({name}) => name === route.name)!.icon}
               size={STYLES.sizeFaIcon}
               color={primaryIconColor} />
-              {isFocused && <TextBase>
-                {String(label)}
-              </TextBase>}
+              {isFocused && <TextBase text={label} />}
           </View>
       </TouchableHaptic>
     )

@@ -21,6 +21,7 @@ const PrivateLayout = () => {
         {/*<Stack.Protected guard={(isSignedIn && isLoaded) || true}>*/}
         <Stack.Protected guard={true}>
           <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="(modal)/timeZone" options={{ presentation: "fullScreenModal" }} />
         </Stack.Protected>
     </Stack>  
   );

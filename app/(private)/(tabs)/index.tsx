@@ -9,7 +9,7 @@ import ViewBase from "@/components/container/View";
 const TabIndex = () => {
   return (
     <ViewBase schemeProperty="tertiaryBg">
-
+      
     </ViewBase>
   );
 }

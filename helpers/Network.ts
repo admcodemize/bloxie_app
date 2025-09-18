@@ -6,9 +6,9 @@ import * as Network from "expo-network";
  * @description Adds a network state listener for displaying a toast if the network is not connected
  * @since 0.0.1
  * @version 0.0.1 */
-/*Network.addNetworkStateListener((state) => {
+Network.addNetworkStateListener((state) => {
   console.log('Network state changed:', state);
-});*/
+});
 
 /**
  * @public

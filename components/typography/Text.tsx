@@ -2,6 +2,8 @@ import { TextProps } from "react-native";
 import Animated, { BaseAnimationBuilder, EntryExitAnimationFunction } from "react-native-reanimated";
 import { ReanimatedKeyframe } from "react-native-reanimated/lib/typescript/layoutReanimation/animationBuilder/Keyframe";
 
+import { useTranslation } from "react-i18next";
+
 import { useThemeColor } from "@/hooks/theme/useThemeColor";
 import { useFontFamily, useFontSize } from "@/hooks/typography/useFont";
 
@@ -34,6 +36,8 @@ export type TextBaseTypes = "label" | "text" | "subtitle" | "title";
  * @version 0.0.1
  * @type */
 export type TextBaseProps = TextProps & {
+  text: string;
+  i18nTranslation?: boolean;
   light?: string;
   dark?: string;
   type?: TextBaseTypes;
@@ -48,6 +52,8 @@ export type TextBaseProps = TextProps & {
  * @since 0.0.1
  * @version 0.0.1
  * @param {Object} param0 - Handles the returning of a generic custom typed and styled text 
+ * @param {string} param0.text - Text to display (Will be translated if i18n is used)
+ * @param {boolean} param0.i18nTranslation - Handles the translation of the text
  * @param {string} param0.dark - Custom hex color in dark mode 
  * @param {string} param0.light - Custom hex color in light mode
  * @param {TextBaseTypes} param0.type - Text type handles the font sizes/family -> constants/Styles
@@ -55,6 +61,8 @@ export type TextBaseProps = TextProps & {
  * @param {EntryOrExitLayoutType} param0.animatedEntering - Animated entering layout type
  * @param {EntryOrExitLayoutType} param0.animatedExiting - Animated exiting layout type */
 const TextBase = ({
+  text,
+  i18nTranslation = true,
   dark,
   light,
   type = "text",
@@ -63,6 +71,8 @@ const TextBase = ({
   animatedExiting,
   ...props
 }: TextBaseProps) => {
+  const { t } = useTranslation();
+
   return (
     <Animated.Text 
       entering={animatedEntering}
@@ -72,7 +82,9 @@ const TextBase = ({
         fontSize: useFontSize(type),
         fontFamily: useFontFamily(type)
       }, style]} 
-      {...props} />
+      {...props}>
+        {i18nTranslation ? t(text) : text}
+    </Animated.Text>
   )
 }
 

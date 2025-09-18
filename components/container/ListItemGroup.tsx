@@ -1,7 +1,9 @@
 import { PropsWithChildren } from "react";
 import { StyleProp, View, ViewStyle } from "react-native";
 
-import { useThemeColor } from "@/hooks/theme/useThemeColor";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+
+import { useThemeColors } from "@/hooks/theme/useThemeColor";
 
 import TextBase from "@/components/typography/Text";
 
@@ -10,8 +12,8 @@ import GlobalTypographyStyle from "@/styles/GlobalTypography";
 /**
  * @public
  * @author Marc Stöckli - Codemize GmbH 
- * @since 0.0.22
- * @version 0.0.22
+ * @since 0.0.1
+ * @version 0.0.1
  * @type */
 export type ListItemGroupProps = PropsWithChildren & {
   title?: string;
@@ -34,14 +36,16 @@ const ListItemGroup = ({
   children,
   style
 }: ListItemGroupProps) => {
-  const info = useThemeColor("info");
+  const { info } = useThemeColors();
 
   return (
     <View style={[style, { gap: 10 }]}>
-      {title && <TextBase style={[GlobalTypographyStyle.standardText, { 
+      {title && <TextBase 
+        text={title}
+        style={[GlobalTypographyStyle.standardText, { 
         color: info, 
         paddingLeft: 8
-      }]}>{title}</TextBase>}
+      }]} />}
       {children}
     </View>
   )

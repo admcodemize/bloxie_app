@@ -1,0 +1,104 @@
+import { PropsWithChildren } from "react";
+import { StyleProp, View, ViewStyle } from "react-native";
+
+import { faCaretRight } from "@fortawesome/duotone-thin-svg-icons";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+
+import { STYLES } from "@/constants/Styles";
+import { useThemeColors } from "@/hooks/theme/useThemeColor";
+
+import TouchableHapticIcon from "@/components/button/TouchableHaptichIcon";
+import TextBase from "@/components/typography/Text";
+
+import GlobalContainerStyle from "@/styles/GlobalContainer";
+import GlobalTypographyStyle from "@/styles/GlobalTypography";
+import ListItemWithChildrenStyle from "@/styles/components/list/ListItemWithChildren";
+
+export enum ListItemWithChildrenTypeEnum {
+  navigation = "navigation",
+  select = "select",
+}
+
+/**
+ * @public
+ * @author Marc Stöckli - Codemize GmbH 
+ * @since 0.0.1
+ * @version 0.0.1
+ * @type */
+export type ListItemWithChildrenProps = PropsWithChildren & {
+  icon?: IconProp;
+  title: string;
+  description: string;
+  titleI18nTranslation?: boolean;
+  descriptionI18nTranslation?: boolean;
+  type?: ListItemWithChildrenTypeEnum;
+  showDescription?: boolean;
+  styleTextComponent?: StyleProp<ViewStyle>;
+}
+
+/**
+ * @public
+ * @author Marc Stöckli - Codemize GmbH 
+ * @description A list item with a title, description and children
+ * @since 0.0.1
+ * @version 0.0.1
+ * @param {ListItemWithChildrenProps} param0
+ * @param {IconProp} param0.icon - The icon to display
+ * @param {string} param0.title - The title of the list item
+ * @param {string} param0.description - The description of the list item
+ * @param {boolean} param0.titleI18nTranslation - Should the title be translated
+ * @param {boolean} param0.descriptionI18nTranslation - Should the description be translated
+ * @param {ListItemWithChildrenTypeEnum} param0.type - The type of the list item which handles the visibility of different components
+ * @param {boolean} param0.showDescription - Should the description be displayed
+ * @param {React.ReactNode} param0.children - The generic children to display on the right side of the list item
+ * @component */
+const ListItemWithChildren = ({
+  icon,
+  title,
+  description,
+  titleI18nTranslation = true,
+  descriptionI18nTranslation = true,
+  type = ListItemWithChildrenTypeEnum.select,
+  showDescription = true,
+  styleTextComponent,
+  children
+}: ListItemWithChildrenProps) => {
+  const { primaryIconColor, info, secondaryBgColor } = useThemeColors();
+
+  return (
+    <View style={[GlobalContainerStyle.rowCenterStart, ListItemWithChildrenStyle.border, {
+      backgroundColor: secondaryBgColor
+    }]}>
+      <View style={[GlobalContainerStyle.rowCenterStart, { gap: 4 }]}>
+        {icon && <TouchableHapticIcon
+          hideBorder
+          icon={icon}
+          iconSize={STYLES.sizeFaIcon + 4} />}
+        <View style={[GlobalContainerStyle.rowCenterBetween, { flex: 1 }]}>
+          <View style={[{ flexShrink: 1 }, styleTextComponent]}>
+            <TextBase 
+              text={title}
+              i18nTranslation={titleI18nTranslation}
+              style={[GlobalTypographyStyle.standardText]} />
+            {showDescription && <TextBase 
+              text={description}
+              i18nTranslation={descriptionI18nTranslation}
+              numberOfLines={2}
+              ellipsizeMode="tail"
+              style={[GlobalTypographyStyle.labelText, { 
+                color: info
+              }]} />}
+          </View>
+          {type === ListItemWithChildrenTypeEnum.navigation && <FontAwesomeIcon
+            icon={faCaretRight as IconProp}
+            size={STYLES.sizeFaIcon}
+            color={primaryIconColor} />}
+        </View>
+      </View>
+      {children}
+    </View>
+  )
+}
+
+export default ListItemWithChildren;

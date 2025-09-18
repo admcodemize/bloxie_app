@@ -5,6 +5,46 @@
       "calendar": "Kalender",
       "contact": "Kontakte",
       "team": "Team"
+    },
+    "modal": {
+      "timeZone": {
+        "title": "Zeitzonen"
+      }
+    },
+    "sheets": {
+      "create": {
+        "title": "Aktionen",
+        "groups": {
+          "manage": "Verwalten",
+          "configuration": "Konfiguration"
+        },
+        "items": {
+          "meeting": {
+            "title": "Termin/Besprechung",
+            "description": "Persönlich organisierte Termine/Besprechungen"
+          },
+          "type": {
+            "title": "Typ",
+            "description": "Verwendung für neue Termine/Besprechungen"
+          },
+          "contact": {
+            "title": "Kontakt",
+            "description": "Kunden/Partner/Bekannte Personen"
+          },
+          "employee": {
+            "title": "Mitarbeiter",
+            "description": "Buchbare Mitarbeiter innerhalb der Organisation"
+          },
+          "availability": {
+            "title": "Verfügbarkeiten",
+            "description": "Wochen-/Datumsbasierte Anwesenheitszeiten"
+          },
+          "bookingPage": {
+            "title": "Buchungsseite",
+            "description": "Öffentlicher Kalender deiner buchbaren Termine"
+          }
+        }
+      }
     }
   }
 }

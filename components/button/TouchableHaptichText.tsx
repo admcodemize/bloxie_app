@@ -19,6 +19,7 @@ import GlobalContainerStyle from "@/styles/GlobalContainer";
 type TouchableHapticTextProps = TouchableHapticProps & {
   text: string;
   type?: TextBaseTypes;
+  i18nTranslation?: boolean;
 }
 
 /**
@@ -36,6 +37,7 @@ type TouchableHapticTextProps = TouchableHapticProps & {
  * @param {number|Insets|null|undefined} param0.hitSlop - Handles the hit slop of the rendered button. 
  * -> A hit slop is a property that allows you to set the area around the button that will trigger the onPress event.
  * @param {boolean} param0.hideNotificationBadge - Handles the visibility of the notification badge
+ * @param {boolean} param0.i18nTranslation - Handles the translation of the text
  * @param {string} param0.text - Text to display
  * @param {TextBaseTypes} param0.type - Text type used for styling */
 const TouchableHapticText = React.forwardRef<View, TouchableHapticTextProps>(({ 
@@ -46,6 +48,7 @@ const TouchableHapticText = React.forwardRef<View, TouchableHapticTextProps>(({
   disabled, 
   hitSlop = 10,
   hideNotificationBadge = true,
+  i18nTranslation = true,
   text,
   type = "text"
 }, ref) => {
@@ -65,9 +68,10 @@ const TouchableHapticText = React.forwardRef<View, TouchableHapticTextProps>(({
           backgroundColor: secondaryBgColor,
           borderColor: primaryBorderColor
         }]}>
-          <TextBase type={type}>
-            {String(text)}
-          </TextBase>
+          <TextBase 
+            text={text}
+            i18nTranslation={i18nTranslation}
+            type={type} />
         </View>
     </TouchableHaptic>
   )

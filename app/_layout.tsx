@@ -3,7 +3,7 @@ import * as React from 'react';
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { Inter_100Thin, Inter_300Light, Inter_500Medium, useFonts } from '@expo-google-fonts/inter';
+import { Inter_100Thin, Inter_300Light, Inter_500Medium, Inter_600SemiBold, useFonts } from '@expo-google-fonts/inter';
 import { Slot, useRouter, useSegments } from 'expo-router';
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from 'expo-status-bar';
@@ -81,7 +81,8 @@ const RootLayout = () => {
   const [hasFontsLoaded] = useFonts({
     Inter_100Thin,
     Inter_300Light,
-    Inter_500Medium
+    Inter_500Medium,
+    Inter_600SemiBold
   });
 
   React.useEffect(() => {

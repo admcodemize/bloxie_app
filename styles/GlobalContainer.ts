@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { STYLES } from "@/constants/Styles";
 
 /**
  * @public
@@ -55,6 +56,9 @@ const GlobalContainerStyle = StyleSheet.create({
   columnEndCenter: {
     alignItems: "flex-end",
     justifyContent: "center",
+  },
+  sizeGap: {
+    gap: STYLES.sizeGap
   }
 })
 
