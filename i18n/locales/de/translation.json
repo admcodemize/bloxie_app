@@ -1,0 +1,10 @@
+{
+  "i18n": {
+    "routes": {
+      "index": "Dashboard",
+      "calendar": "Kalender",
+      "contact": "Kontakte",
+      "team": "Team"
+    }
+  }
+}
