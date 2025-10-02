@@ -7,18 +7,18 @@ import { FlatList, LayoutChangeEvent, ListRenderItemInfo, View } from 'react-nat
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 import { KEYS } from '@/constants/Keys';
+import { ROUTES_PRIVATE_HEADER } from '@/constants/Routes';
+import { STYLES } from '@/constants/Styles';
 import { useThemeColors } from '@/hooks/theme/useThemeColor';
 
 import TouchableHaptic from '@/components/button/TouchableHaptic';
+import Divider from '@/components/container/Divider';
+import RootHeaderTrailing from '@/components/layout/header/private/trailing/RootHeaderTrailing';
 import TextBase from '@/components/typography/Text';
 
-import Divider from '@/components/container/Divider';
-import { ROUTES_PRIVATE_HEADER } from '@/constants/Routes';
-import { STYLES } from '@/constants/Styles';
 import RootHeaderStyle from '@/styles/components/layout/header/private/RootHeader';
 import GlobalButtonStyle from '@/styles/GlobalButton';
 import GlobalContainerStyle from '@/styles/GlobalContainer';
-import RootHeaderTrailing from './trailing/RootHeaderTrailing';
 
 /**
  * @private
@@ -45,7 +45,7 @@ type RootHeaderProps = {
  * @public
  * @author Marc Stöckli - Codemize GmbH 
  * @since 0.0.1
- * @version 0.0.1
+ * @version 0.0.2
  * @param {RootHeaderProps} param0
  * @param {TabNavigationState<ParamListBase>} param0.state
  * @param {MaterialTopTabDescriptorMap} param0.descriptions 
@@ -59,7 +59,7 @@ const RootHeader = ({
   topTabBar
 }: RootHeaderProps) => {
   /** @description Used to get the theme based colors */
-  const { secondaryBgColor, primaryBgColor, primaryBorderColor, primaryIconColor } = useThemeColors();
+  const { focusedBg, focusedContent, secondaryBgColor, primaryBgColor, primaryBorderColor, primaryIconColor, secondaryIconColor } = useThemeColors();
 
   /** @description Used to translate the routes */
   const { t } = useTranslation();
@@ -105,16 +105,21 @@ const RootHeader = ({
     const { options } = topTabBar.descriptors[route.key];
     const label = options.title ? t(options.title) : route.name
 
+    /** @description Used to get the route data for further handling during further logic */
+    const routeData = ROUTES_PRIVATE_HEADER.find(({name}) => name === route.name);
+
     return (
       <TouchableHaptic
         onPress={() => onPress({ route, isFocused })}
         style={[GlobalButtonStyle.spacing, GlobalContainerStyle.columnCenterCenter, RootHeaderStyle.router]}>
-          <View style={[GlobalContainerStyle.rowCenterCenter, { gap: STYLES.sizeGap }]}>
+          <View style={[GlobalContainerStyle.rowCenterCenter, { gap: STYLES.sizeGap - 4 }]}>
             <FontAwesomeIcon
-              icon={ROUTES_PRIVATE_HEADER.find(({name}) => name === route.name)!.icon}
+              icon={isFocused ? routeData?.iconSolid! : routeData?.iconDuotone!}
               size={STYLES.sizeFaIcon}
-              color={primaryIconColor} />
-              {isFocused && <TextBase text={label} />}
+              color={isFocused ? focusedContent : primaryIconColor} />
+              {isFocused && <TextBase 
+                text={label}
+                color={isFocused ? secondaryIconColor : primaryIconColor} />}
           </View>
       </TouchableHaptic>
     )
@@ -135,10 +140,12 @@ const RootHeader = ({
       <View
         key={`${KEYS.screenContext}-touchable-${item.key}`}
         style={[GlobalContainerStyle.columnCenterCenter, RootHeaderStyle.render, {
-          backgroundColor: isFocused ? secondaryBgColor : primaryBgColor,
-          borderColor: primaryBorderColor
+          backgroundColor: isFocused ? focusedBg : secondaryBgColor,
+          borderColor: isFocused ? focusedBg : primaryBorderColor
         }]}>
-          <Touchable route={item} isFocused={isFocused} />
+          <Touchable 
+            route={item} 
+            isFocused={isFocused} />
       </View>
     );
   };

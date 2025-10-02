@@ -8,16 +8,12 @@ import { Slot, useRouter, useSegments } from 'expo-router';
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from 'expo-status-bar';
 
-import { ClerkLoaded, ClerkProvider, useAuth } from "@clerk/clerk-expo";
-import { ConvexProviderWithClerk } from "convex/react-clerk";
-
 import { isNetworkConnected } from "@/helpers/Network";
 
-import { tokenCache } from "@/utils/auth/cache";
-import { publishableKey } from "@/utils/auth/publishable";
-import { client } from '@/utils/database/convex';
 
 import SafeAreaContextViewBase from '@/components/container/SafeAreaContextView';
+
+import DropdownProvider from "@/context/DropdownContext";
 
 import "@/helpers/Sentry";
 import "@/i18n";
@@ -45,7 +41,7 @@ const StartSlot = () => {
   /**
    * @description Hook is needed to check if user data has been loaded and of course if user is signed in
    * @see {@link clerk/clerk-expo} */
-  const { isLoaded, isSignedIn } = useAuth();
+
 
   /** @description Used for imperative routing after user is signed in */
   const router = useRouter();
@@ -56,14 +52,15 @@ const StartSlot = () => {
   React.useEffect((): void => {
     router.replace("/(private)/(tabs)");
 
-    if (!isLoaded) return;
     /*if (isSignedIn && !segments[0].includes("(private)")) router.replace("/(private)/(tabs)")
     else if (!isSignedIn) router.replace("/(public)")*/
-  }, [isSignedIn]);
+  }, []);
 
   return (
     <SafeAreaContextViewBase>
-      <Slot /> 
+      <DropdownProvider>
+        <Slot /> 
+      </DropdownProvider>
     </SafeAreaContextViewBase>
   )
 }
@@ -109,17 +106,9 @@ const RootLayout = () => {
       onLayout={onLayoutRootView}>
         <StatusBar style="auto" />
         <GestureHandlerRootView>
-          <ClerkProvider
-            tokenCache={tokenCache}
-            publishableKey={publishableKey}>
-              <ClerkLoaded>
-                <ConvexProviderWithClerk
-                  client={client} 
-                  useAuth={useAuth}>
-                    <StartSlot />
-                </ConvexProviderWithClerk>
-              </ClerkLoaded>
-          </ClerkProvider>
+          
+          <StartSlot />
+          
         </GestureHandlerRootView>
     </SafeAreaProvider>
   );

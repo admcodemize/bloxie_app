@@ -17,7 +17,7 @@ const GlobalButtonStyle = StyleSheet.create({
   },
   border: {
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 6,
   }
 })
 

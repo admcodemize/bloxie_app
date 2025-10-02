@@ -1,7 +1,6 @@
 import { PropsWithChildren } from "react";
 import { StyleProp, View, ViewStyle } from "react-native";
 
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 import { useThemeColors } from "@/hooks/theme/useThemeColor";
 
@@ -13,10 +12,11 @@ import GlobalTypographyStyle from "@/styles/GlobalTypography";
  * @public
  * @author Marc Stöckli - Codemize GmbH 
  * @since 0.0.1
- * @version 0.0.1
+ * @version 0.0.2
  * @type */
 export type ListItemGroupProps = PropsWithChildren & {
   title?: string;
+  gap?: number;
   style?: StyleProp<ViewStyle>;
 }
 
@@ -24,22 +24,24 @@ export type ListItemGroupProps = PropsWithChildren & {
  * @public
  * @author Marc Stöckli - Codemize GmbH 
  * @since 0.0.1
- * @version 0.0.1
+ * @version 0.0.2
  * @description A container for a group of settings
  * -> Used for components such as ListItemWithChildren or all the other components that are registered in the path components/list/..
  * @param {ListItemGroupProps} param0
  * @param {string} param0.title - The title of the group
+ * @param {number} param0.gap - The gap of the group between the items
  * @param {React.ReactNode} param0.children - The children of the group
  * @component */
 const ListItemGroup = ({
   title,
+  gap = 10,
   children,
   style
 }: ListItemGroupProps) => {
   const { info } = useThemeColors();
 
   return (
-    <View style={[style, { gap: 10 }]}>
+    <View style={[style, { gap }]}>
       {title && <TextBase 
         text={title}
         style={[GlobalTypographyStyle.standardText, { 

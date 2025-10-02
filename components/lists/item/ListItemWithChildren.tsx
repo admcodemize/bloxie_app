@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import { StyleProp, View, ViewStyle } from "react-native";
 
-import { faCaretRight } from "@fortawesome/duotone-thin-svg-icons";
+import { faAngleRight } from "@fortawesome/duotone-thin-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
@@ -13,7 +13,7 @@ import TextBase from "@/components/typography/Text";
 
 import GlobalContainerStyle from "@/styles/GlobalContainer";
 import GlobalTypographyStyle from "@/styles/GlobalTypography";
-import ListItemWithChildrenStyle from "@/styles/components/list/ListItemWithChildren";
+import ListItemWithChildrenStyle from "@/styles/components/lists/item/ListItemWithChildren";
 
 export enum ListItemWithChildrenTypeEnum {
   navigation = "navigation",
@@ -42,7 +42,7 @@ export type ListItemWithChildrenProps = PropsWithChildren & {
  * @author Marc Stöckli - Codemize GmbH 
  * @description A list item with a title, description and children
  * @since 0.0.1
- * @version 0.0.1
+ * @version 0.0.2
  * @param {ListItemWithChildrenProps} param0
  * @param {IconProp} param0.icon - The icon to display
  * @param {string} param0.title - The title of the list item
@@ -64,23 +64,22 @@ const ListItemWithChildren = ({
   styleTextComponent,
   children
 }: ListItemWithChildrenProps) => {
-  const { primaryIconColor, info, secondaryBgColor } = useThemeColors();
+  const { primaryIconColor, info, primaryIconBg } = useThemeColors();
 
   return (
-    <View style={[GlobalContainerStyle.rowCenterStart, ListItemWithChildrenStyle.border, {
-      backgroundColor: secondaryBgColor
-    }]}>
-      <View style={[GlobalContainerStyle.rowCenterStart, { gap: 4 }]}>
+    <View style={[GlobalContainerStyle.rowCenterStart, ListItemWithChildrenStyle.border]}>
+      <View style={[GlobalContainerStyle.rowCenterStart, { gap: 8 }]}>
         {icon && <TouchableHapticIcon
-          hideBorder
+          backgroundColor={primaryIconBg}
+          iconColor={"#fff"}
           icon={icon}
           iconSize={STYLES.sizeFaIcon + 4} />}
         <View style={[GlobalContainerStyle.rowCenterBetween, { flex: 1 }]}>
-          <View style={[{ flexShrink: 1 }, styleTextComponent]}>
+          <View style={[{ flexShrink: 1, gap: showDescription ? 3 : 0 }, styleTextComponent]}>
             <TextBase 
               text={title}
               i18nTranslation={titleI18nTranslation}
-              style={[GlobalTypographyStyle.standardText]} />
+              style={[GlobalTypographyStyle.labelText]} />
             {showDescription && <TextBase 
               text={description}
               i18nTranslation={descriptionI18nTranslation}
@@ -91,7 +90,7 @@ const ListItemWithChildren = ({
               }]} />}
           </View>
           {type === ListItemWithChildrenTypeEnum.navigation && <FontAwesomeIcon
-            icon={faCaretRight as IconProp}
+            icon={faAngleRight as IconProp}
             size={STYLES.sizeFaIcon}
             color={primaryIconColor} />}
         </View>

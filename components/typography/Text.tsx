@@ -33,11 +33,12 @@ export type TextBaseTypes = "label" | "text" | "subtitle" | "title";
  * @public
  * @author Marc Stöckli - Codemize GmbH 
  * @since 0.0.1
- * @version 0.0.1
+ * @version 0.0.2
  * @type */
 export type TextBaseProps = TextProps & {
   text: string;
   i18nTranslation?: boolean;
+  color?: string;
   light?: string;
   dark?: string;
   type?: TextBaseTypes;
@@ -50,9 +51,10 @@ export type TextBaseProps = TextProps & {
  * @author Marc Stöckli - Codemize GmbH 
  * @description Returns theme based, flexible and styled view, which will be used as a default container component
  * @since 0.0.1
- * @version 0.0.1
+ * @version 0.0.2
  * @param {Object} param0 - Handles the returning of a generic custom typed and styled text 
  * @param {string} param0.text - Text to display (Will be translated if i18n is used)
+ * @param {string} param0.color - Custom hex color
  * @param {boolean} param0.i18nTranslation - Handles the translation of the text
  * @param {string} param0.dark - Custom hex color in dark mode 
  * @param {string} param0.light - Custom hex color in light mode
@@ -62,6 +64,7 @@ export type TextBaseProps = TextProps & {
  * @param {EntryOrExitLayoutType} param0.animatedExiting - Animated exiting layout type */
 const TextBase = ({
   text,
+  color,
   i18nTranslation = true,
   dark,
   light,
@@ -78,7 +81,7 @@ const TextBase = ({
       entering={animatedEntering}
       exiting={animatedExiting}
       style={[{
-        color: useThemeColor(type as keyof typeof COLORS.light & keyof typeof COLORS.dark, { dark, light }),
+        color: color ? color : useThemeColor(type as keyof typeof COLORS.light & keyof typeof COLORS.dark, { dark, light }),
         fontSize: useFontSize(type),
         fontFamily: useFontFamily(type)
       }, style]} 

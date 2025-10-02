@@ -1,4 +1,3 @@
-import { useAuth } from "@clerk/clerk-expo";
 import {
   createMaterialTopTabNavigator,
   MaterialTopTabBarProps,
@@ -8,7 +7,7 @@ import {
 import { ParamListBase, TabNavigationState } from "@react-navigation/native";
 import { withLayoutContext } from "expo-router";
 import * as React from "react";
-import { Dimensions, Text, View } from "react-native";
+import { Dimensions } from "react-native";
 
 import { KEYS } from "@/constants/Keys";
 import { ROUTES_PRIVATE_HEADER } from "@/constants/Routes";
@@ -16,7 +15,6 @@ import { ROUTES_PRIVATE_HEADER } from "@/constants/Routes";
 import { useThemeColor } from "@/hooks/theme/useThemeColor";
 
 import RootHeader from "@/components/layout/header/private/RootHeader";
-import RootFooter from "./footer/private/RootFooter";
 
 const { Navigator } = createMaterialTopTabNavigator();
 
@@ -57,11 +55,7 @@ const LayoutContext = ({
   /** 
    * @description Used when swiping between the tabs with initial lazy mode
    * -> Without setting the primary background the lazy swipe flashes the default white screen */
-  const primaryBgColor = useThemeColor("primaryBg");
-
-  /**
-   * @description Used to handle the redirect to the sign in screen if the user is not signed in */
-  const { isSignedIn } = useAuth();
+  const secondaryBgColor = useThemeColor("secondaryBg");
   
   /**
    * @description Initializes the tab bar buttons which handles the different calendar views such as list/day/week or member 
@@ -89,8 +83,8 @@ const LayoutContext = ({
       screenOptions={{
         swipeEnabled: true,
         animationEnabled: true,
-        tabBarContentContainerStyle: { backgroundColor: primaryBgColor },
-        sceneStyle: { backgroundColor: primaryBgColor },
+        tabBarContentContainerStyle: { backgroundColor: secondaryBgColor },
+        sceneStyle: { backgroundColor: secondaryBgColor },
       }}>
         {ROUTES_PRIVATE_HEADER.map((route) => (
           <LayoutContextBase.Screen 

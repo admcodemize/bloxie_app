@@ -1,4 +1,5 @@
-import ViewBase from "@/components/container/View";
+import DropdownOverlay from "@/components/container/DropdownOverlay";
+import ScreenDashboard from "@/screens/private/tabs/Dashboard";
 
 /**
  * @public
@@ -8,9 +9,10 @@ import ViewBase from "@/components/container/View";
  * @component */
 const TabIndex = () => {
   return (
-    <ViewBase schemeProperty="tertiaryBg">
-      
-    </ViewBase>
+    <>
+      <ScreenDashboard />
+      <DropdownOverlay />
+    </>
   );
 }
 

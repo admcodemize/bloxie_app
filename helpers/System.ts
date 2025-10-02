@@ -1,5 +1,5 @@
-import Constants from 'expo-constants';
 import { Dimensions, Platform } from "react-native";
+import Constants from 'expo-constants';
 
 import { PLATFORM } from "@/constants/System";
 
@@ -141,6 +141,15 @@ export const getTimeZoneAbbrevation = ({
 }: TimeZoneAbbrevationProps): string|undefined => now.toLocaleString([getLocalization().code], {
   timeZoneName: "shortOffset"
 })?.split(' ')?.pop();
+
+/**
+ * @public
+ * @author Marc Stöckli - Codemize GmbH 
+ * @description Returns whether the device uses 24 hour clock
+ * @since 0.0.2
+ * @version 0.0.1
+ * @function */
+export const uses24HourClock = (): boolean => Localization.getCalendars()[0]?.uses24hourClock || false;
 
 /**
  * @public

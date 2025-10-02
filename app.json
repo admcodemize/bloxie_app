@@ -2,7 +2,7 @@
   "expo": {
     "name": "bloxie",
     "slug": "bloxie",
-    "version": "1.0.0",
+    "version": "0.0.2",
     "orientation": "portrait",
     "icon": "",
     "scheme": "bloxie",
@@ -10,7 +10,8 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.admcodemize.bloxie"
+      "bundleIdentifier": "com.admcodemize.bloxie",
+      "appleTeamId": "R247V95WCZ"
     },
     "android": {
       "adaptiveIcon": {
@@ -23,14 +24,15 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "output": "static",
+      "bundler": "metro",
+      "output": "server",
       "favicon": ""
     },
     "plugins": [
-      "expo-router",
-      [
-        "expo-splash-screen",
-        {
+      ["expo-router", {
+        "origin": "https://bloxie.ch/"
+      }],
+      ["expo-splash-screen", {
           "image": "",
           "imageWidth": 200,
           "resizeMode": "contain",
@@ -38,9 +40,8 @@
           "dark": {
             "backgroundColor": "#000000"
           }
-        }
-      ],
-      "expo-web-browser"
+        }],
+      ["expo-web-browser"]
     ],
     "experiments": {
       "typedRoutes": true,

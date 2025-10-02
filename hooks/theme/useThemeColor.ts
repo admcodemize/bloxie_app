@@ -26,7 +26,7 @@ export const useThemeColor = (
   prop: keyof typeof COLORS.light & keyof typeof COLORS.dark,
   props: ThemeProps = {},
 ) => {
-  const theme = useColorScheme() || "dark";
+  const theme = useColorScheme() || "light";
   const colorFromProps = props[theme];
 
   if (colorFromProps) return colorFromProps;
@@ -38,7 +38,7 @@ export const useThemeColor = (
  * @author Marc Stöckli - Codemize GmbH 
  * @description Returns theme based colors
  * @since 0.0.1
- * @version 0.0.1
+ * @version 0.0.2
  * @function */
 export const useThemeColors = () => {
   const primaryBgColor = useThemeColor("primaryBg");
@@ -46,8 +46,16 @@ export const useThemeColors = () => {
   const tertiaryBgColor =  useThemeColor("tertiaryBg");
   const primaryBorderColor = useThemeColor("primaryBorder");
   const primaryIconColor = useThemeColor("primaryIcon");
+  const secondaryIconColor = useThemeColor("secondaryIcon");
+  const primaryIconBg = useThemeColor("primaryIconBg");
   const info = useThemeColor("info");
   const text = useThemeColor("text");
+  const focusedBg = useThemeColor("focusedBg");
+  const focusedContent = useThemeColor("focusedContent");
+  const success = useThemeColor("success");
+  const error = useThemeColor("error");
+  const warning = useThemeColor("warning");
+  const information = useThemeColor("information");
 
   return {
     primaryBgColor,
@@ -55,7 +63,15 @@ export const useThemeColors = () => {
     tertiaryBgColor,
     primaryBorderColor,
     primaryIconColor,
+    secondaryIconColor,
+    primaryIconBg,
     info,
-    text
+    text,
+    focusedBg,
+    focusedContent,
+    success,
+    error,
+    warning,
+    information
   }
 }

@@ -1,8 +1,8 @@
-import { getWeek, LocaleWidth, Month } from "date-fns";
+import { format, getWeek, LocaleWidth, Month } from "date-fns";
 import * as Moment from "moment-timezone";
 
 import { VALID_TIMEZONES } from "@/constants/System";
-import { getLocalization, getTimeZone } from "@/helpers/System";
+import { getLocalization, getTimeZone, uses24HourClock } from "@/helpers/System";
 
 /**
  * @public
@@ -39,7 +39,7 @@ export type TimeZoneProps = {
  * @public
  * @author Marc Stöckli - Codemize GmbH 
  * @since 0.0.1
- * @version 0.0.1
+ * @version 0.0.2
  * @type */
 export type TimeZoneGroupProps = {
   name: string;
@@ -50,7 +50,7 @@ export type TimeZoneGroupProps = {
  * @public
  * @author Marc Stöckli - Codemize GmbH 
  * @since 0.0.1
- * @version 0.0.1
+ * @version 0.0.2
  * @type */
 export type TimeZoneItemsProps = {
   text: string;
@@ -93,9 +93,20 @@ export const getMonthWide = ({
 /**
  * @public
  * @author Marc Stöckli - Codemize GmbH 
+ * @description Returns the locale formatted time
+ * @since 0.0.2
+ * @version 0.0.1
+ * @param {Date} now - Initial/Start date */
+ export const getLocaleTime = ({
+  now = new Date()
+}: NowDateProps) => format(now, "pp", { locale: getLocalization() });
+
+/**
+ * @public
+ * @author Marc Stöckli - Codemize GmbH 
  * @description Returns the time zones with the date and time formatted
  * @since 0.0.1
- * @version 0.0.1
+ * @version 0.0.2
  * @param {TimeZoneProps} param0
  * @param {boolean} param0.basedOnLocalization - Whether to return the time zones based on localization
  * -> Example: Europe/Zurich returns all the time zones in the Europe zone
@@ -106,7 +117,7 @@ export const getTimeZones = ({
   const timeZoneGroups: TimeZoneGroupProps[] = [];
   Moment.tz.names()
   .filter((zone) => VALID_TIMEZONES.some((validZone) => zone.includes(validZone)) && 
-    (basedOnLocalization && zone.includes(getTimeZone().split("/")[0])))
+    ((basedOnLocalization) ? zone.includes(getTimeZone().split("/")[0]) : true))
   .sort((a, b) => a.localeCompare(b))
   .forEach(zone => {
     /**
@@ -114,18 +125,12 @@ export const getTimeZones = ({
      * Example: [America: [America/New_York, America/Los_Angeles, America/Chicago, America/Denver, America/Phoenix]] */
     let timeZoneGroup = timeZoneGroups.find((timeZone) => timeZone.name === zone.split("/")[0]);
     if (!timeZoneGroup) {
-      timeZoneGroup = {
-        name: zone.split("/")[0],
-        timeZones: []
-      };
+      timeZoneGroup = { name: zone.split("/")[0], timeZones: [] };
       timeZoneGroups.push(timeZoneGroup);
     }
 
-    timeZoneGroup.timeZones.push({
-      text: zone,
-      moment: Moment.tz(zone)
-    });
-  })
-
+    timeZoneGroup.timeZones.push({ text: zone, moment: Moment.tz(zone) });
+  });
+  
   return timeZoneGroups;
 }

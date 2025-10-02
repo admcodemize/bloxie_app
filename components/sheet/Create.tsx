@@ -1,4 +1,3 @@
-import ScreenCreate from "@/screens/private/sheet/Create";
 
 /**
  * @public
@@ -8,7 +7,8 @@ import ScreenCreate from "@/screens/private/sheet/Create";
  * @component */
 const Create = () => {
   return (
-    <ScreenCreate />
+    <></>
+    /*<ScreenCreate />*/
   );
 };
 

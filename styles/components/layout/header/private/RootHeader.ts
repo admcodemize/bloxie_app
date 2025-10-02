@@ -19,7 +19,7 @@ const RootHeaderStyle = StyleSheet.create({
   render: {
     overflow: "hidden",
     borderRadius: 8,
-    borderWidth: 0.5
+    borderWidth: 1
   }
 })
 

@@ -23,6 +23,8 @@ type TouchableHapticIconProps = TouchableHapticProps & {
   icon: IconProp;
   iconSize?: number;
   hideBorder?: boolean;
+  backgroundColor?: string;
+  iconColor?: string;
 }
 
 /**
@@ -30,7 +32,7 @@ type TouchableHapticIconProps = TouchableHapticProps & {
  * @author Marc Stöckli - Codemize GmbH 
  * @description Returns a touchable (opacity) button with included haptic gesture -> Only for platform iOs/android
  * @since 0.0.1
- * @version 0.0.1
+ * @version 0.0.2
  * @param {Object} param0 - Handles the touchable haptic events and styling
  * @param {Function} param0.onPress - Callback function when user pressed the button
  * @param {Function} param0.onLongPress - Callback function when user long presses the button
@@ -41,6 +43,8 @@ type TouchableHapticIconProps = TouchableHapticProps & {
  * -> A hit slop is a property that allows you to set the area around the button that will trigger the onPress event.
  * @param {boolean} param0.hideNotificationBadge - Handles the visibility of the notification badge
  * @param {boolean} param0.hideBorder - Handles the visibility of the border
+ * @param {string} param0.backgroundColor - Handles the background color of the rendered button
+ * @param {string} param0.iconColor - Handles the icon color of the rendered button
  * @param {IconProp} param0.icon - Fontawesome icon
  * @param {number} param0.iconSize - Fontawesome icon size */
 const TouchableHapticIcon = React.forwardRef<View, TouchableHapticIconProps>(({ 
@@ -52,10 +56,12 @@ const TouchableHapticIcon = React.forwardRef<View, TouchableHapticIconProps>(({
   hitSlop = 10,
   hideNotificationBadge = true,
   hideBorder = false,
+  backgroundColor,
+  iconColor,
   icon,
   iconSize = STYLES.sizeFaIcon
 }, ref) => {
-  const { primaryBorderColor, primaryIconColor, secondaryBgColor } = useThemeColors();
+  const { primaryBorderColor, primaryIconColor, secondaryBgColor, primaryBgColor } = useThemeColors();
 
   return (
     <TouchableHaptic
@@ -68,14 +74,14 @@ const TouchableHapticIcon = React.forwardRef<View, TouchableHapticIconProps>(({
       hitSlop={hitSlop}
       hideNotificationBadge={hideNotificationBadge}>
         <View style={[GlobalButtonStyle.spacing, GlobalContainerStyle.columnCenterCenter, GlobalButtonStyle.border, RootHeaderStyle.router, {
-          backgroundColor: hideBorder ? undefined : secondaryBgColor,
+          backgroundColor: backgroundColor ? backgroundColor : hideBorder ? primaryBgColor : secondaryBgColor,
           borderColor: primaryBorderColor,
           borderWidth: hideBorder ? 0 : 1
         }]}>
           <FontAwesomeIcon
             icon={icon}
             size={iconSize}
-            color={primaryIconColor} />
+            color={iconColor ? iconColor : primaryIconColor} />
         </View>
     </TouchableHaptic>
   )

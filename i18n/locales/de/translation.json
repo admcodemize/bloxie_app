@@ -1,14 +1,27 @@
 {
   "i18n": {
+    "searchField": {
+      "placeholder": "Suchen"
+    },
     "routes": {
       "index": "Dashboard",
       "calendar": "Kalender",
       "contact": "Kontakte",
       "team": "Team"
     },
+    "list": {
+      "active": "Aktiv"
+    },
     "modal": {
       "timeZone": {
-        "title": "Zeitzonen"
+        "stickyHeader": "Zonen",
+        "stickyHeaderPlaceholder": "Zeitzone:",
+        "title": "Zeitzonen",
+        "description": "Das Wechseln der Zeitzonen ermöglicht dir eine vereinfachte Sicht für das länderübergreifende Terminieren."
+      },
+      "create": {
+        "title": "Aktionen",
+        "description": "Führe eine neue Aktion durch oder konfiguriere/verwalte dein(e) Buchungsseite/Team"
       }
     },
     "sheets": {

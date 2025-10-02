@@ -1,6 +1,18 @@
 /**
  * @private
  * @author Marc Stöckli - Codemize GmbH 
+ * @since 0.0.2
+ * @version 0.0.1
+ * @type */
+type LevelProps = {
+  level1: number;
+  level2: number;
+  level3: number;
+}
+
+/**
+ * @private
+ * @author Marc Stöckli - Codemize GmbH 
  * @since 0.0.1
  * @version 0.0.1
  * @type */
@@ -13,6 +25,18 @@ type StylesProps = {
   paddingVertical: number;
   marginHorizontal: number;
   footerRootHeight: number;
+}
+
+/**
+ * @public
+ * @author Marc Stöckli - Codemize GmbH 
+ * @since 0.0.2
+ * @version 0.0.1
+ * @constant */
+export const LEVEL = <LevelProps>{
+  level1: 10,
+  level2: 5,
+  level3: 1
 }
 
 /**
