@@ -46,7 +46,7 @@ export const LEVEL = <LevelProps>{
  * @version 0.0.1
  * @constant */
 export const STYLES = <StylesProps>{
-  sizeTouchable: 32,
+  sizeTouchable: 30,
   sizeFaIcon: 14,
   sizeGap: 8,
   layoutTabHeight: 60,

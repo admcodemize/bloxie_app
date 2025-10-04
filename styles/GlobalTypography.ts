@@ -27,6 +27,10 @@ const GlobalTypographyStyle = StyleSheet.create({
   titleSubtitle: {
     fontSize: Number(SIZES.title), 
     fontFamily: String(FAMILIY.subtitle) 
+  },
+  headerSubtitle: {
+    fontSize: Number(SIZES.header), 
+    fontFamily: String(FAMILIY.header) 
   }
 })
 

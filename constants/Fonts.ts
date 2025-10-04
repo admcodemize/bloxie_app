@@ -37,5 +37,5 @@ export const FAMILIY = <FontProps>{
   text: "Inter_500Medium",
   subtitle: "Inter_600SemiBold",
   title: "Inter_600SemiBold",
-  header: "Inter_300Light"
+  header: "Inter_800ExtraBold"
 }

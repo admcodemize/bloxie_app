@@ -45,6 +45,7 @@ export const useThemeColors = () => {
   const secondaryBgColor = useThemeColor("secondaryBg");
   const tertiaryBgColor =  useThemeColor("tertiaryBg");
   const primaryBorderColor = useThemeColor("primaryBorder");
+  const secondaryBorderColor = useThemeColor("secondaryBorder");
   const primaryIconColor = useThemeColor("primaryIcon");
   const secondaryIconColor = useThemeColor("secondaryIcon");
   const primaryIconBg = useThemeColor("primaryIconBg");
@@ -62,6 +63,7 @@ export const useThemeColors = () => {
     secondaryBgColor,
     tertiaryBgColor,
     primaryBorderColor,
+    secondaryBorderColor,
     primaryIconColor,
     secondaryIconColor,
     primaryIconBg,

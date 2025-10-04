@@ -27,7 +27,7 @@ type EntryOrExitLayoutType =
  * @since 0.0.1
  * @version 0.0.1
  * @type */
-export type TextBaseTypes = "label" | "text" | "subtitle" | "title";
+export type TextBaseTypes = "label" | "text" | "subtitle" | "title" | "header";
 
 /**
  * @public
