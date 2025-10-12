@@ -1,0 +1,169 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+/* Datum-Auswahl */
+.dateSelection {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.dateGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 0.75rem;
+}
+
+.dateButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0.5rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.dateButton:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dateButtonSelected {
+  border-color: #667eea;
+  background: #667eea;
+  color: white;
+}
+
+.dateDay {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-bottom: 0.25rem;
+}
+
+.dateNumber {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.dateMonth {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+/* Zeit-Auswahl */
+.timeSelection {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.timeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+}
+
+.timeButton {
+  padding: 0.875rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.timeButton:hover {
+  border-color: #667eea;
+  background: #f5f7ff;
+}
+
+.timeButtonSelected {
+  border-color: #667eea;
+  background: #667eea;
+  color: white;
+}
+
+.noSlots {
+  text-align: center;
+  padding: 2rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Formular-Sektion */
+.formSection {
+  margin-top: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .sectionTitle {
+    color: #ededed;
+  }
+
+  .dateSelection,
+  .timeSelection {
+    border-bottom-color: #333;
+  }
+
+  .dateButton,
+  .timeButton {
+    background: #2a2a2a;
+    border-color: #333;
+    color: #ededed;
+  }
+
+  .dateButton:hover,
+  .timeButton:hover {
+    background: #333;
+  }
+
+  .noSlots {
+    color: #999;
+  }
+}
+
+@media (max-width: 768px) {
+  .dateGrid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .dateButton {
+    padding: 0.75rem 0.25rem;
+  }
+
+  .dateNumber {
+    font-size: 1.25rem;
+  }
+
+  .timeGrid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .timeButton {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.875rem;
+  }
+}
+

@@ -10,8 +10,20 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.admcodemize.bloxie",
-      "appleTeamId": "R247V95WCZ"
+      "bundleIdentifier": "com.codemize.bloxie",
+      "appleTeamId": "R247V95WCZ",
+      "associatedDomains": [
+        "applinks:bloxie.ch",
+        "activitycontinuation:bloxie.ch"
+      ],
+      "config": {
+        "usesNonExemptEncryption": false
+      },
+      "entitlements": {
+        "com.apple.developer.applesignin": [
+          "Default"
+        ]
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -41,7 +53,17 @@
             "backgroundColor": "#000000"
           }
         }],
-      ["expo-web-browser"]
+      ["expo-web-browser"],
+      ["expo-localization"],
+      ["expo-secure-store", {
+        "configureAndroidBackup": true,
+        "faceIDPermission": "Allow $(PRODUCT_NAME) to access your Face ID biometric data."
+      }],
+      ["@sentry/react-native/expo", {
+        "url": "https://sentry.io/",
+        "project": "react-native",
+        "organization": "codemize-gmbh"
+      }]
     ],
     "experiments": {
       "typedRoutes": true,

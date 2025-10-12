@@ -14,8 +14,6 @@ import { ROUTES_PRIVATE_HEADER } from "@/constants/Routes";
 
 import { useThemeColor } from "@/hooks/theme/useThemeColor";
 
-import RootHeader from "@/components/layout/header/private/RootHeader";
-
 const { Navigator } = createMaterialTopTabNavigator();
 
 /**
@@ -33,7 +31,8 @@ type LayoutContextProps = {
  * @author Marc Stöckli - Codemize GmbH 
  * @since 0.0.1
  * @version 0.0.1
- * @description Returns a navigator that automatically injects matched routes and renders nothing when there are no children. */
+ * @description Returns a navigator that automatically injects matched routes and renders nothing when there are no children. 
+ * @deprecated */
 const LayoutContextBase = withLayoutContext<
   MaterialTopTabNavigationOptions,
   typeof Navigator,
@@ -48,7 +47,8 @@ const DIM = Dimensions.get("window");
  * @author Marc Stöckli - Codemize GmbH 
  * @description Returns the root layout context for the private views which handles the root header and there buttons 
  * @since 0.0.1
- * @version 0.0.1 */
+ * @version 0.0.1
+ * @deprecated */
 const LayoutContext = ({
 
 }: LayoutContextProps) => {
@@ -59,12 +59,14 @@ const LayoutContext = ({
   
   /**
    * @description Initializes the tab bar buttons which handles the different calendar views such as list/day/week or member 
-   * @param {MaterialTopTabBarProps} props - The props for the tab bar */
+   * @param {MaterialTopTabBarProps} props - The props for the tab bar
+   * @deprecated */
   const tabBar = React.useCallback((
     props: MaterialTopTabBarProps
   ): React.ReactNode => (
-    <RootHeader
-      topTabBar={props} />
+    <></>
+    /*<RootHeader
+      topTabBar={props} />*/
   ), []);
 
   /**
@@ -81,7 +83,6 @@ const LayoutContext = ({
       tabBar={tabBar}
       initialLayout={{ width: DIM.width }}
       screenOptions={{
-        swipeEnabled: true,
         animationEnabled: true,
         tabBarContentContainerStyle: { backgroundColor: secondaryBgColor },
         sceneStyle: { backgroundColor: secondaryBgColor },
@@ -94,7 +95,8 @@ const LayoutContext = ({
             listeners={listenerFocus}
             options={{
               title: route.title,
-              lazy: route.lazy,
+              //lazy: route.lazy,
+              //swipeEnabled: route.swipeEnabled
             }} />
         ))}
     </LayoutContextBase>

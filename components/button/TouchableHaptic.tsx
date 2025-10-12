@@ -18,6 +18,7 @@ export type TouchableHapticProps = React.PropsWithChildren & {
   onLayout?: (e: LayoutChangeEvent) => void;
   style?: ViewStyle|ViewStyle[];
   disabled?: boolean;
+  visible?: boolean;
   hitSlop?: number|Insets|null|undefined;
   hideNotificationBadge?: boolean;
 }
@@ -34,6 +35,7 @@ export type TouchableHapticProps = React.PropsWithChildren & {
  * @param {Function} param0.onLayout - Callback function invoked on mount and layout changes 
  * @param {StyleProp<ViewStyle>} param0.style - Extended custom styling
  * @param {boolean} param0.disabled - Handles the inactivity of the rendered button
+ * @param {boolean} param0.visible - Handles the visibility of the rendered button
  * @param {number|Insets|null|undefined} param0.hitSlop - Handles the hit slop of the rendered button. 
  * -> A hit slop is a property that allows you to set the area around the button that will trigger the onPress event.
  * @param {boolean} param0.hideNotificationBadge - Handles the visibility of the notification badge
@@ -44,6 +46,7 @@ const TouchableHaptic = React.forwardRef<View, TouchableHapticProps>(({
   onLayout = () => {},
   style, 
   disabled, 
+  visible = true,
   hitSlop = 10,
   hideNotificationBadge = true,
   children 
@@ -74,7 +77,8 @@ const TouchableHaptic = React.forwardRef<View, TouchableHapticProps>(({
   }, []);
 
   return (
-    <NotificationBadge hide={hideNotificationBadge}>
+    <>
+    {visible && <NotificationBadge hide={hideNotificationBadge}>
       <Pressable 
         ref={ref}
         style={[style, { opacity: disabled ? 0.5 : 1 }]} 
@@ -85,7 +89,8 @@ const TouchableHaptic = React.forwardRef<View, TouchableHapticProps>(({
         onLongPress={onLongPressInternal}>
           {children}
       </Pressable>
-    </NotificationBadge>
+    </NotificationBadge>}
+    </>
   )
 })
 

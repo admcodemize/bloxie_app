@@ -17,14 +17,13 @@ import {
  * @author Marc Stöckli - Codemize GmbH 
  * @readonly
  * @since 0.0.1
- * @version 0.0.2
+ * @version 0.0.3
  * @type */
 export type RoutesPrivateHeader = {
   name: string;
   title: string;
   iconDuotone: IconProp;
   iconSolid: IconProp;
-  lazy: boolean;
 }
 
 /**
@@ -34,30 +33,26 @@ export type RoutesPrivateHeader = {
  * -> Property "name" is equal to the stack screen name -> ../app/private/tabs/_layout.tsx
  * @readonly
  * @since 0.0.1
- * @version 0.0.2
+ * @version 0.0.3
  * @constant */
 export const ROUTES_PRIVATE_HEADER: RoutesPrivateHeader[] = [{
   name: "index",
   title: "i18n.routes.index",
   iconDuotone: faObjectsColumnDuotone as IconProp,
   iconSolid: faObjectsColumnSolid as IconProp,
-  lazy: true,
 }, {
   name: "calendar",
   title: "i18n.routes.calendar",
   iconDuotone: faCalendarDuotone as IconProp,
   iconSolid: faCalendarSolid as IconProp,
-  lazy: true,
 }, {
   name: "contact",
   title: "i18n.routes.contact",
   iconDuotone: faAddressBookDuotone as IconProp,
   iconSolid: faAddressBookSolid as IconProp,
-  lazy: true,
 }, {
   name: "team",
   title: "i18n.routes.team",
   iconDuotone: faChartNetworkDuotone as IconProp,
   iconSolid: faChartNetworkSolid as IconProp,
-  lazy: true,
 }];

@@ -23,7 +23,7 @@ export const SIZES = <FontProps>{
   text: 11,
   subtitle: 11,
   title: 13,
-  header: 16
+  header: 14
 }
 
 /**

@@ -45,6 +45,7 @@ const SafeAreaContextViewBase = ({
   ...props
 }: SafeAreaViewProps) => (
   <SafeAreaView 
+    edges={edges}
     style={[{ 
       flex: 1,
       backgroundColor: useThemeColor(schemeProperty, { 

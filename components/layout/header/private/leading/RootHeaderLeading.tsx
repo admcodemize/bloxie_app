@@ -1,0 +1,38 @@
+import { View } from "react-native";
+
+import TextBase from "@/components/typography/Text";
+
+import RootHeaderLeadingStyle from "@/styles/components/layout/header/private/leading/RootHeaderLeading";
+import GlobalContainerStyle from "@/styles/GlobalContainer";
+import GlobalTypographyStyle from "@/styles/GlobalTypography";
+import { Link } from "expo-router";
+
+/**
+ * @public
+ * @author Marc Stöckli - Codemize GmbH 
+ * @since 0.0.4
+ * @version 0.0.1
+ * @component */
+const RootHeaderLeading = () => {
+  return (
+    <View style={RootHeaderLeadingStyle.view}>
+      <View style={GlobalContainerStyle.columnStartStart}>
+        <TextBase 
+          text="Dashboard"
+          style={GlobalTypographyStyle.titleSubtitle} />
+        <Link href="http://localhost:3000/codemize">
+          <TextBase 
+            text="bloxie.app.ch/codemize"
+            type="label" 
+            style={[GlobalTypographyStyle.labelText]} />
+        </Link>
+        {/*<TextBase 
+          text="bloxie.app.ch/codemize"
+          type="label" 
+          style={[GlobalTypographyStyle.labelText]} />*/}
+      </View>
+    </View>
+  )
+}
+
+export default RootHeaderLeading;

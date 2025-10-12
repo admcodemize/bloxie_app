@@ -14,7 +14,7 @@ type LevelProps = {
  * @private
  * @author Marc Stöckli - Codemize GmbH 
  * @since 0.0.1
- * @version 0.0.1
+ * @version 0.0.2
  * @type */
 type StylesProps = {
   sizeTouchable: number;
@@ -24,7 +24,7 @@ type StylesProps = {
   paddingHorizontal: number;
   paddingVertical: number;
   marginHorizontal: number;
-  footerRootHeight: number;
+  layoutFooterHeight: number;
 }
 
 /**
@@ -43,15 +43,15 @@ export const LEVEL = <LevelProps>{
  * @public
  * @author Marc Stöckli - Codemize GmbH 
  * @since 0.0.1
- * @version 0.0.1
+ * @version 0.0.4
  * @constant */
 export const STYLES = <StylesProps>{
   sizeTouchable: 30,
   sizeFaIcon: 14,
   sizeGap: 8,
-  layoutTabHeight: 60,
+  layoutTabHeight: 50,
   paddingHorizontal: 14,
   paddingVertical: 10,
   marginHorizontal: 20,
-  footerRootHeight: 60
+  layoutFooterHeight: 50
 }

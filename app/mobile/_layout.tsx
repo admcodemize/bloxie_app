@@ -10,7 +10,6 @@ import { StatusBar } from 'expo-status-bar';
 
 import { isNetworkConnected } from "@/helpers/Network";
 
-
 import SafeAreaContextViewBase from '@/components/container/SafeAreaContextView';
 
 import DropdownProvider from "@/context/DropdownContext";
@@ -23,7 +22,7 @@ import 'react-native-reanimated';
  * @public
  * @description Fixes while using a deeplink for getting the stack back button */
 export const unstable_settings = {
-  anchor: '(public)',
+  anchor: '/(public)',
 };
 
 /** @description Prevent the splash screen from auto-hiding before asset loading is complete. */
@@ -48,6 +47,7 @@ const StartSlot = () => {
   
   /** @description Segment with the group syntax "(...)" will be used to prevent showing up in the url */
   const segments = useSegments();
+  console.log(segments);
 
   React.useEffect((): void => {
     router.replace("/(private)/(tabs)");

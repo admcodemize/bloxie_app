@@ -2,7 +2,7 @@ import { PropsWithChildren } from "react";
 import { ScrollView, View, ViewStyle } from "react-native";
 
 
-import { DropdownContextPositionProps, DropdownContextProps, useDropdownContextStore } from "@/context/DropdownContext";
+import { DropdownContextPositionProps } from "@/context/DropdownContext";
 import { useThemeColors } from "@/hooks/theme/useThemeColor";
 
 import { measureInWindowLeft } from "@/helpers/System";
@@ -15,8 +15,6 @@ import TouchableDropdownStyle from "@/styles/components/button/TouchableDropdown
  * @version 0.0.1
  * @type */
 export type TouchableDropdownProps = PropsWithChildren & ViewStyle & {
-  isRightFloat?: boolean;
-  title?: string;
   style?: ViewStyle|ViewStyle[];
   gapBetweenItems?: number;
 }
@@ -66,30 +64,23 @@ export const open = ({
  * @author Marc Stöckli - Codemize GmbH 
  * @description Returns a positioned dropdown based on parent component
  * @since 0.0.2
- * @version 0.0.1
+ * @version 0.0.2
  * @param {Object} param0 
- * @param {boolean} param0.isRightFloat - Check's if dropdown is right floated
- * @param {string} param0.title - Header title
- * @param {ViewStyle} param0.style - Custom dropdown style */
+ * @param {ViewStyle} param0.style - Custom dropdown style
+ * @param {number} param0.gapBetweenItems - Gap between items */
 const TouchableDropdown = ({ 
-  title,
   style,
   gapBetweenItems = 4,
   children,
   ...props
 }: TouchableDropdownProps) => {  
-  const { primaryBorderColor, secondaryBgColor } = useThemeColors();
-
-  /**
-   * @description Handles the visibility of the overall dropdown component
-   * @see {@link context/DropdownContext} */
-  const close = useDropdownContextStore((state: DropdownContextProps) => state.close);
+  const { tertiaryBorderColor, secondaryBgColor } = useThemeColors();
 
   return (
     <View 
       style={[TouchableDropdownStyle.view, {
         backgroundColor: secondaryBgColor,
-        borderColor: primaryBorderColor
+        borderColor: tertiaryBorderColor
       }, style]}
       {...props}>
         <ScrollView

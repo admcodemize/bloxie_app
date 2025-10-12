@@ -38,7 +38,7 @@ export const useThemeColor = (
  * @author Marc Stöckli - Codemize GmbH 
  * @description Returns theme based colors
  * @since 0.0.1
- * @version 0.0.2
+ * @version 0.0.3
  * @function */
 export const useThemeColors = () => {
   const primaryBgColor = useThemeColor("primaryBg");
@@ -46,6 +46,7 @@ export const useThemeColors = () => {
   const tertiaryBgColor =  useThemeColor("tertiaryBg");
   const primaryBorderColor = useThemeColor("primaryBorder");
   const secondaryBorderColor = useThemeColor("secondaryBorder");
+  const tertiaryBorderColor = useThemeColor("tertiaryBorder");
   const primaryIconColor = useThemeColor("primaryIcon");
   const secondaryIconColor = useThemeColor("secondaryIcon");
   const primaryIconBg = useThemeColor("primaryIconBg");
@@ -64,6 +65,7 @@ export const useThemeColors = () => {
     tertiaryBgColor,
     primaryBorderColor,
     secondaryBorderColor,
+    tertiaryBorderColor,
     primaryIconColor,
     secondaryIconColor,
     primaryIconBg,
