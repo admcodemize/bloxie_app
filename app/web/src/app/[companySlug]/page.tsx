@@ -1,5 +1,7 @@
+import { api } from '@/../convex/_generated/api';
 import BookingCalendar from '@/components/booking/BookingCalendar';
 import CompanyHeader from '@/components/booking/CompanyHeader';
+import { convex } from '@/lib/convex';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import styles from './page.module.css';
@@ -30,14 +32,10 @@ interface BookingPageProps {
 // Statische Parameter für ISR generieren
 export async function generateStaticParams() {
   try {
-    // TODO: Convex Query für alle öffentlichen Companies
-    // const companies = await convex.query(api.companies.getPublicCompanies);
-    // return companies.map((company) => ({
-    //   companySlug: company.slug,
-    // }));
-    
-    // Vorerst leeres Array zurückgeben (wird dynamisch generiert)
-    return [];
+    const companies = await convex.query(api.companies.getPublicCompanies);
+    return companies.map((company) => ({
+      companySlug: company.slug,
+    }));
   } catch (error) {
     console.error('Error generating static params:', error);
     return [];
@@ -49,16 +47,23 @@ export async function generateMetadata({ params }: BookingPageProps): Promise<Me
   const { companySlug } = await params;
   
   try {
-    // TODO: Company Daten aus Convex holen
-    // const company = await convex.query(api.companies.getBySlug, { slug: companySlug });
+    const company = await convex.query(api.companies.getBySlug, { slug: companySlug });
     
+    if (!company) {
+      return {
+        title: 'Termin buchen | Bloxie',
+        description: 'Online Terminbuchung',
+      };
+    }
+
     return {
-      title: `Termin buchen bei ${companySlug} | Bloxie`,
-      description: `Buchen Sie Ihren Termin bei ${companySlug} schnell und einfach online.`,
+      title: `Termin buchen bei ${company.name} | Bloxie`,
+      description: company.description || `Buchen Sie Ihren Termin bei ${company.name} schnell und einfach online.`,
       openGraph: {
-        title: `Termin buchen bei ${companySlug}`,
-        description: `Online Terminbuchung`,
+        title: `Termin buchen bei ${company.name}`,
+        description: company.description || 'Online Terminbuchung',
         type: 'website',
+        ...(company.logo && { images: [company.logo] }),
       },
     };
   } catch (error) {
@@ -77,50 +82,21 @@ export default async function BookingPage({ params }: BookingPageProps) {
   let availableSlots: TimeSlot[] = [];
 
   try {
-    // TODO: Convex Queries implementieren
-    // company = await convex.query(api.companies.getBySlug, { slug: companySlug });
+    company = await convex.query(api.companies.getBySlug, { slug: companySlug });
     
-    // if (!company) {
-    //   notFound();
-    // }
+    if (!company) {
+      notFound();
+    }
 
     // Verfügbare Slots für die nächsten 30 Tage laden
-    // const startDate = new Date().toISOString();
-    // const endDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+    const startDate = new Date().toISOString().split('T')[0];
+    const endDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
     
-    // availableSlots = await convex.query(api.bookings.getAvailableSlots, {
-    //   companySlug,
-    //   startDate,
-    //   endDate,
-    // });
-
-    // Demo Daten (bis Convex Setup fertig ist)
-    company = {
-      _id: '1',
-      name: companySlug.charAt(0).toUpperCase() + companySlug.slice(1),
-      slug: companySlug,
-      description: 'Buchen Sie Ihren Termin online',
-    };
-
-    // Demo Slots für die nächsten 7 Tage
-    const demoSlots: TimeSlot[] = [];
-    for (let day = 0; day < 7; day++) {
-      const date = new Date();
-      date.setDate(date.getDate() + day);
-      const dateStr = date.toISOString().split('T')[0];
-
-      // 9-17 Uhr, stündliche Slots
-      for (let hour = 9; hour < 17; hour++) {
-        demoSlots.push({
-          id: `${dateStr}-${hour}`,
-          date: dateStr,
-          startTime: `${hour.toString().padStart(2, '0')}:00`,
-          endTime: `${(hour + 1).toString().padStart(2, '0')}:00`,
-          duration: 60,
-        });
-      }
-    }
-    availableSlots = demoSlots;
+    availableSlots = await convex.query(api.bookings.getAvailableSlots, {
+      companySlug,
+      startDate,
+      endDate,
+    });
 
   } catch (error) {
     console.error('Error loading booking data:', error);

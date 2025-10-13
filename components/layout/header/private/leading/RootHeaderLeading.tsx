@@ -20,9 +20,9 @@ const RootHeaderLeading = () => {
         <TextBase 
           text="Dashboard"
           style={GlobalTypographyStyle.titleSubtitle} />
-        <Link href="http://localhost:3000/codemize">
+        <Link href="https://bloxie.ch/codemize">
           <TextBase 
-            text="bloxie.app.ch/codemize"
+            text="bloxie.ch/codemize"
             type="label" 
             style={[GlobalTypographyStyle.labelText]} />
         </Link>

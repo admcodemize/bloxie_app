@@ -33,7 +33,7 @@ export type TextBaseTypes = "label" | "text" | "subtitle" | "title" | "header";
  * @public
  * @author Marc Stöckli - Codemize GmbH 
  * @since 0.0.1
- * @version 0.0.2
+ * @version 0.0.3
  * @type */
 export type TextBaseProps = TextProps & {
   text: string;
@@ -42,6 +42,7 @@ export type TextBaseProps = TextProps & {
   light?: string;
   dark?: string;
   type?: TextBaseTypes;
+  showColon?: boolean;
   animatedEntering?: EntryOrExitLayoutType;
   animatedExiting?: EntryOrExitLayoutType;
 }
@@ -51,7 +52,7 @@ export type TextBaseProps = TextProps & {
  * @author Marc Stöckli - Codemize GmbH 
  * @description Returns theme based, flexible and styled view, which will be used as a default container component
  * @since 0.0.1
- * @version 0.0.2
+ * @version 0.0.3
  * @param {Object} param0 - Handles the returning of a generic custom typed and styled text 
  * @param {string} param0.text - Text to display (Will be translated if i18n is used)
  * @param {string} param0.color - Custom hex color
@@ -59,6 +60,7 @@ export type TextBaseProps = TextProps & {
  * @param {string} param0.dark - Custom hex color in dark mode 
  * @param {string} param0.light - Custom hex color in light mode
  * @param {TextBaseTypes} param0.type - Text type handles the font sizes/family -> constants/Styles
+ * @param {boolean} param0.showColon - Handles the visibility of the colon after the text
  * @param {StyleProp<TextStyle>} param0.style - Extended custom styling 
  * @param {EntryOrExitLayoutType} param0.animatedEntering - Animated entering layout type
  * @param {EntryOrExitLayoutType} param0.animatedExiting - Animated exiting layout type */
@@ -70,6 +72,7 @@ const TextBase = ({
   light,
   type = "text",
   style,
+  showColon = false,
   animatedEntering,
   animatedExiting,
   ...props
@@ -86,7 +89,9 @@ const TextBase = ({
         fontFamily: useFontFamily(type)
       }, style]} 
       {...props}>
-        {i18nTranslation ? t(text) : text}
+        {i18nTranslation ? `${showColon 
+          ? t(text) + ":" : t(text)}` 
+          : `${showColon ? text + ":" : text}`}
     </Animated.Text>
   )
 }

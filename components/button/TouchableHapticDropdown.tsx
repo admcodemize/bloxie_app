@@ -14,6 +14,7 @@ import TextBase, { TextBaseTypes } from "@/components/typography/Text";
 
 import GlobalButtonStyle from "@/styles/GlobalButton";
 import GlobalContainerStyle from "@/styles/GlobalContainer";
+import GlobalTypographyStyle from "@/styles/GlobalTypography";
 
 /**
  * @private
@@ -34,7 +35,7 @@ type TouchableHapticDropdownProps = TouchableHapticProps & {
  * @author Marc Stöckli - Codemize GmbH 
  * @description Returns a touchable (opacity) button with included haptic gesture -> Only for platform iOs/android
  * @since 0.0.2
- * @version 0.0.1
+ * @version 0.0.2
  * @param {Object} param0 - Handles the touchable haptic events and styling
  * @param {Function} param0.onPress - Callback function when user pressed the button
  * @param {Function} param0.onLongPress - Callback function when user long presses the button
@@ -93,7 +94,8 @@ const TouchableHapticDropdown = React.forwardRef<View, TouchableHapticDropdownPr
             <TextBase 
               text={text}
               i18nTranslation={i18nTranslation}
-              type={type} />
+              type={type}
+              style={[GlobalTypographyStyle.labelText]} />
           </View>
           <FontAwesomeIcon
             icon={faCaretDown as IconProp}

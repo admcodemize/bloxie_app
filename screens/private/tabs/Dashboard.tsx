@@ -1,103 +1,43 @@
 import React from "react";
 import { Dimensions, GestureResponderEvent, View } from "react-native";
 
-import { faArrowUpRightFromSquare, faCalendar, faCalendarCheck, faCalendarDays, faCalendarWeek, faChartNetwork, faCheckDouble, faDown, faHandHoldingHand, faRotate, faStopwatch, faUp, faUsers, faUserSecret, faWallet, faXmark } from "@fortawesome/duotone-thin-svg-icons";
+import { faArrowUpRightFromSquare, faCalendarCheck, faCheckDouble, faDown, faHandHoldingHand, faStopwatch, faUp, faUsers, faWallet, faXmark } from "@fortawesome/duotone-thin-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 import { STYLES } from "@/constants/Styles";
 import { useDropdown } from "@/hooks/button/useDropdown";
 
-import TouchableDropdown, { open as _open } from "@/components/button/TouchableDropdown";
-import TouchableDropdownItem from "@/components/button/TouchableDropdownItem";
+import { open as _open } from "@/components/button/TouchableDropdown";
 import TextBase from "@/components/typography/Text";
 
-import TouchableHapticDropdown from "@/components/button/TouchableHapticDropdown";
-import TouchableHapticIcon from "@/components/button/TouchableHaptichIcon";
+import DashboardAnalytics from "@/components/layout/dashboard/DashboardAnalytics";
+import DashboardStatistics from "@/components/layout/dashboard/DashboardStatistics";
 import { useThemeColors } from "@/hooks/theme/useThemeColor";
 import GlobalContainerStyle from "@/styles/GlobalContainer";
 import GlobalTypographyStyle from "@/styles/GlobalTypography";
+import DashboardStyle from "@/styles/screens/private/tabs/Dashboard";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { useTranslation } from "react-i18next";
 import { LineChart } from "react-native-gifted-charts";
 
 // https://www.lucidmeetings.com/meeting-types
 
-const DROPDOWN_WIDTH = 175;
 
-const ScreenDashboard = () => {
+/**
+ * @public
+ * @author Marc Stöckli - Codemize GmbH 
+ * @since 0.0.4
+ * @version 0.0.1
+ * @component */
+const ScreenDashboard = (
+
+) => {
   const { primaryBgColor, primaryIconColor, success, error, focusedBg, secondaryBorderColor, text, primaryBorderColor } = useThemeColors();
 
   const refContainer = React.useRef<any>(null)
-  const refTeams = React.useRef<View>(null);
-  const refCalendar = React.useRef<View>(null);
 
-  const [value, setValue] = React.useState("0.00");
+  const { t } = useTranslation();
 
-
-  const [data1, setData1] = React.useState(() => {
-    const data = [];
-    const today = new Date('2025-10-11');
-    let currentValue = 120; // Start with a mid-range value
-    
-    for (let i = 30; i >= 0; i--) {
-      const date = new Date(today);
-      date.setDate(today.getDate() - i);
-      const dateStr = date.toISOString().split('T')[0];
-      
-      // Generate small random change between -15 and +15
-      const change = (Math.random() * 30) - 15;
-      currentValue = Math.max(20, Math.min(240, currentValue + change));
-      
-      data.push({
-        value: Math.floor(currentValue),
-        now: dateStr,
-        dataPointLabel: `${currentValue.toFixed(2)} CHF`,
-      });
-    }
-    
-    return data;
-  })
-
-  const [data2, setData2] = React.useState(() => {
-    const data = [];
-    const today = new Date('2025-10-11');
-    let currentValue = 40; // Start with a mid-range value
-    
-    for (let i = 90; i >= 0; i--) {
-      const date = new Date(today);
-      date.setDate(today.getDate() - i);
-      const dateStr = date.toISOString().split('T')[0];
-      
-      // Generate small random change between -15 and +15
-      const change = (Math.random() * 30) - 15;
-      currentValue = Math.max(20, Math.min(250, currentValue + change));
-      
-      data.push({
-        value: Math.floor(currentValue),
-        now: dateStr,
-        dataPointLabel: `${currentValue.toFixed(2)} CHF`,
-      });
-    }
-    
-    return data;
-  })
-
-
-  const [data3, setData3] = React.useState(() => {
-    const data = [];
-    let currentValue = 3; // Start with a mid-range value
-    
-    for (let i = 0; i < 30; i++) {
-      // Generate small random change between -1.5 and +1.5
-      const change = (Math.random() * 3) - 1.5;
-      currentValue = Math.max(0, Math.min(10, currentValue + change));
-      
-      data.push({
-        value: Math.floor(currentValue),
-      });
-    }
-    
-    return data;
-  })
 
   const [data4, setData4] = React.useState(() => {
     const data = [];
@@ -116,8 +56,6 @@ const ScreenDashboard = () => {
     return data;
   })
 
-  const [data, setData] = React.useState(data1);
-  const [maxValue, setMaxValue] = React.useState(220);
 
  /**
    * @description Get the dropdown functions.
@@ -141,15 +79,31 @@ const ScreenDashboard = () => {
       refContainer,
       open,
       children,
-      containerWidth: DROPDOWN_WIDTH
     });
   }, [open]);
+
+  const onPressRefresh = React.useCallback(() => {
+
+  }, []);
+
+  const onPressTeams = React.useCallback(() => {
+
+  }, []);
+
+  const onPressDays = React.useCallback(() => {
+
+  }, []);
 
   return (
     <View 
       ref={refContainer}
-      //schemeProperty="secondaryBg"
-      style={{ padding: STYLES.paddingHorizontal, paddingBottom: 2, gap: STYLES.sizeGap + 2 }}>
+      style={DashboardStyle.view}>
+        <DashboardAnalytics
+          refContainer={refContainer}
+          onPressRefresh={onPressRefresh}
+          onPressTeams={onPressTeams}
+          onPressDays={onPressDays} />
+        <DashboardStatistics new={true} />
 
 
 
@@ -158,66 +112,7 @@ const ScreenDashboard = () => {
 
 
 
-
-
-
-
-      <View style={{ gap: STYLES.sizeGap / 2 }}>
-        <TextBase 
-          text="Analytics" 
-          style={[GlobalTypographyStyle.textSubtitle, { paddingLeft: 4 }]} />
-        <TextBase 
-          type="label" 
-          text="Untersuche deine Daten mithilfe von Statistiken und Diagrammen um neue Erkenntnisse zu gewinnen oder Trends zu identifizieren." 
-          style={[GlobalTypographyStyle.labelText, { paddingLeft: 4 }]} />
-      </View>
-      <View style={[GlobalContainerStyle.rowCenterBetween]}>
-        <View style={[GlobalContainerStyle.rowCenterStart, { gap: STYLES.sizeGap }]}>
-          <TouchableHapticDropdown
-            ref={refTeams}
-            icon={faChartNetwork as IconProp}
-            text="codemize.com"
-            backgroundColor={primaryBgColor}
-            onPress={onPressDropdown(refTeams)(<TouchableDropdownBase />)} /> 
-          <TouchableHapticDropdown
-            ref={refCalendar}
-            icon={faCalendar as IconProp}
-            text="Letzte 7 Tage"
-            backgroundColor={primaryBgColor}
-            onPress={onPressDropdown(refCalendar)(<TouchableDropdownBaseDays />)} /> 
-        </View>
-        <TouchableHapticIcon
-          icon={faRotate as IconProp}
-          iconColor={primaryIconColor}
-          backgroundColor={primaryBgColor}
-          onPress={() => { setData(data2) }} />
-      </View>
-
-
-
-
-
-
-
-      <View style={{ gap: STYLES.sizeGap / 2 }}>
-        <TextBase 
-          text="Statistiken" 
-          style={[GlobalTypographyStyle.textSubtitle, { paddingLeft: 4 }]} />
-        <TextBase 
-          type="label" 
-          text="Überblick der wichtigsten Daten zur Performance und Effizienz deiner Termine und Buchungen."
-          style={[GlobalTypographyStyle.labelText, { paddingLeft: 4 }]} />
-      </View>
-        <View style={{ paddingHorizontal: 4, flexDirection: "row", justifyContent: "flex-start", gap: 4 }}>
-          <TextBase 
-            text={`Einkommen: ${value.toString()} CHF`}
-            style={[GlobalTypographyStyle.titleSubtitle, { fontSize: 10, color: text }]} />
-          <TextBase 
-            type="label" 
-            text="18. März 2025"
-            style={[GlobalTypographyStyle.labelText]} />
-        </View>
-        <LineChart
+        {/*<LineChart
           areaChart
           //spacing={(Dimensions.get("window").width / data.length) - 2}
           width={Dimensions.get("window").width - 30}
@@ -269,7 +164,7 @@ const ScreenDashboard = () => {
             //dataPointsRadius1={2}
 
             stepValue={100}
-            initialSpacing={10} // default 20
+            initialSpacing={0} // default 20
 
             color="#75B39B"
 
@@ -327,10 +222,10 @@ const ScreenDashboard = () => {
                     <TextBase text={items[0].dataPointLabel} style={[GlobalTypographyStyle.headerSubtitle, { fontSize: 10, color: "#fff", 
                       textAlign: "center" }]} />
                   </View>
-                )*/}
+                )*}
               },
             }}
-            data={data}/>
+            data={data}/>*/}
 
       <View style={{ gap: STYLES.sizeGap - 2 }}>
 
@@ -688,7 +583,7 @@ const ScreenDashboard = () => {
 
       <View style={{ paddingHorizontal: 4, flexDirection: "row", justifyContent: "flex-start", gap: 4 }}>
           <TextBase 
-            text={`Ablehnungen: ${value}`}
+            text={`Ablehnungen: ${18}`}
             style={[GlobalTypographyStyle.titleSubtitle, { fontSize: 10, color: text }]} />
           <TextBase 
             type="label" 
@@ -1084,87 +979,7 @@ const ScreenDashboard = () => {
   );
 }
 
-const TouchableDropdownBase = () => {
-  const { primaryIconColor } = useThemeColors();
-
-  return (
-    <TouchableDropdown
-      style={[{ width: "auto" }]}>
-        <TouchableDropdownItem
-          isSelected={true}
-          onPress={() => () => {}}>
-            <View style={[GlobalContainerStyle.rowCenterStart, { gap: STYLES.sizeGap }]}>
-            <FontAwesomeIcon
-              icon={faChartNetwork as IconProp}
-              size={STYLES.sizeFaIcon}
-              color={"#fff"} />
-            <TextBase 
-              text="codemize.com"
-              style={[GlobalTypographyStyle.textSubtitle, { fontSize: 10, color: "#fff" }]} />
-            </View>
-      </TouchableDropdownItem>
-      <TouchableDropdownItem
-          onPress={() => () => {}}>
-            <View style={[GlobalContainerStyle.rowCenterStart, { gap: STYLES.sizeGap }]}>
-            <FontAwesomeIcon
-              icon={faUserSecret as IconProp}
-              size={STYLES.sizeFaIcon}
-              color={primaryIconColor} />
-            <TextBase 
-              text="Privater Kalender"
-              style={[GlobalTypographyStyle.labelText, { fontSize: 10, color: "#7E7D7F" }]} />
-            </View>
-      </TouchableDropdownItem>
-    </TouchableDropdown>
-  )
-}
 
 
-const TouchableDropdownBaseDays = () => {
-  const { primaryIconColor } = useThemeColors();
-
-  return (
-    <TouchableDropdown
-      style={[{ width: "auto" }]}>
-        <TouchableDropdownItem
-          onPress={() => () => {}}>
-            <View style={[GlobalContainerStyle.rowCenterStart, { gap: STYLES.sizeGap }]}>
-            <FontAwesomeIcon
-              icon={faCalendarWeek as IconProp}
-              size={STYLES.sizeFaIcon}
-              color={primaryIconColor} />
-            <TextBase 
-              text="Letzte 7 Tage"
-              style={[GlobalTypographyStyle.textSubtitle, { fontSize: 10, color: "#7E7D7F" }]} />
-            </View>
-      </TouchableDropdownItem>
-      <TouchableDropdownItem
-          isSelected={true}
-          onPress={() => () => {}}>
-            <View style={[GlobalContainerStyle.rowCenterStart, { gap: STYLES.sizeGap }]}>
-            <FontAwesomeIcon
-              icon={faCalendarDays as IconProp}
-              size={STYLES.sizeFaIcon}
-              color={"#fff"} />
-            <TextBase 
-              text="Letzte 30 Tage"
-              style={[GlobalTypographyStyle.textSubtitle, { fontSize: 10, color: "#fff" }]} />
-            </View>
-      </TouchableDropdownItem>
-      <TouchableDropdownItem
-          onPress={() => () => {}}>
-            <View style={[GlobalContainerStyle.rowCenterStart, { gap: STYLES.sizeGap }]}>
-            <FontAwesomeIcon
-              icon={faCalendar as IconProp}
-              size={STYLES.sizeFaIcon}
-              color={primaryIconColor} />
-            <TextBase 
-              text="Gesamter Zeitraum"
-              style={[GlobalTypographyStyle.labelText, { fontSize: 10, color: "#7E7D7F" }]} />
-            </View>
-      </TouchableDropdownItem>
-    </TouchableDropdown>
-  )
-}
 
 export default ScreenDashboard;

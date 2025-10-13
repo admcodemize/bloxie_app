@@ -64,7 +64,7 @@ export const open = ({
  * @author Marc Stöckli - Codemize GmbH 
  * @description Returns a positioned dropdown based on parent component
  * @since 0.0.2
- * @version 0.0.2
+ * @version 0.0.3
  * @param {Object} param0 
  * @param {ViewStyle} param0.style - Custom dropdown style
  * @param {number} param0.gapBetweenItems - Gap between items */

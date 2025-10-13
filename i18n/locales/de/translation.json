@@ -12,16 +12,28 @@
     "list": {
       "active": "Aktiv"
     },
-    "modal": {
-      "timeZone": {
-        "stickyHeader": "Zonen",
-        "stickyHeaderPlaceholder": "Zeitzone:",
-        "title": "Zeitzonen",
-        "description": "Das Wechseln der Zeitzonen ermöglicht dir eine vereinfachte Sicht für das länderübergreifende Terminieren."
-      },
-      "create": {
-        "title": "Aktionen",
-        "description": "Führe eine neue Aktion durch oder konfiguriere/verwalte dein(e) Buchungsseite/Team"
+    "dropdown": {
+      "dashboard": {
+        "calendar": {
+          "last7Days": "Letzte 7 Tage",
+          "last30Days": "Letzte 30 Tage",
+          "allTime": "Gesamter Zeitraum"
+        }
+      }
+    },
+    "screens": {
+      "dashboard": {
+        "analytics": {
+          "title": "Analytics",
+          "description": "Untersuche deine Daten mithilfe von Statistiken und Diagrammen um neue Erkenntnisse zu gewinnen oder Trends zu identifizieren."
+        },
+        "statistics": {
+          "title": "Statistiken",
+          "description": "Überblick der wichtigsten Daten zur Performance und Effizienz deiner Termine und Buchungen.",
+          "pointer": {
+            "income": "Einkommen"
+          }
+        }
       }
     },
     "sheets": {

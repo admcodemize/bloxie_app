@@ -38,7 +38,7 @@ export const useThemeColor = (
  * @author Marc Stöckli - Codemize GmbH 
  * @description Returns theme based colors
  * @since 0.0.1
- * @version 0.0.3
+ * @version 0.0.4
  * @function */
 export const useThemeColors = () => {
   const primaryBgColor = useThemeColor("primaryBg");
@@ -58,6 +58,7 @@ export const useThemeColors = () => {
   const error = useThemeColor("error");
   const warning = useThemeColor("warning");
   const information = useThemeColor("information");
+  const pointerComponent = useThemeColor("pointerComponent");
 
   return {
     primaryBgColor,
@@ -76,6 +77,7 @@ export const useThemeColors = () => {
     success,
     error,
     warning,
-    information
+    information,
+    pointerComponent
   }
 }

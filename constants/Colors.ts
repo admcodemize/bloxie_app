@@ -8,7 +8,7 @@ import { Platform } from 'react-native';
  * @author Marc Stöckli - Codemize GmbH 
  * @readonly
  * @since 0.0.1
- * @version 0.0.2
+ * @version 0.0.3
  * @constant */
 export const COLORS = {
   light: {
@@ -23,6 +23,7 @@ export const COLORS = {
     error: "#D15555",
     warning: "#D76F00",
     information: "#0092F9",
+    pointerComponent: "black",
     primaryBg: "#fff",
     secondaryBg: "#F3F3F3",
     tertiaryBg: "#F3F3F3",
@@ -46,6 +47,7 @@ export const COLORS = {
     error: "#D15555",
     warning: "#D76F00",
     information: "#0092F9",
+    pointerComponent: "white",
     primaryBg: "#15151D",
     secondaryBg: "#181820",
     tertiaryBg: "#232429",

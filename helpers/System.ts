@@ -1,5 +1,5 @@
-import { Dimensions, Platform } from "react-native";
 import Constants from 'expo-constants';
+import { Dimensions, Platform } from "react-native";
 
 import { PLATFORM } from "@/constants/System";
 
@@ -110,6 +110,15 @@ export const getCountryCode = (): string|null => {
   const locales = Localization.getLocales();
   return locales[0].regionCode;
 }
+
+/**
+ * @public
+ * @author Marc Stöckli - Codemize GmbH 
+ * @description Returns the currency of the device
+ * @since 0.0.5
+ * @version 0.0.1
+ * @function */
+export const getCurrencyCode = (): string => Localization.getLocales()[0].currencyCode || "USD";
 
 /**
  * @public

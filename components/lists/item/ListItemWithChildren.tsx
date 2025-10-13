@@ -15,6 +15,12 @@ import GlobalContainerStyle from "@/styles/GlobalContainer";
 import GlobalTypographyStyle from "@/styles/GlobalTypography";
 import ListItemWithChildrenStyle from "@/styles/components/lists/item/ListItemWithChildren";
 
+/**
+ * @public
+ * @author Marc Stöckli - Codemize GmbH 
+ * @since 0.0.1
+ * @version 0.0.1
+ * @enum */
 export enum ListItemWithChildrenTypeEnum {
   navigation = "navigation",
   select = "select",
