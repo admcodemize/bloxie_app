@@ -52,6 +52,10 @@ export const useThemeColors = () => {
   const primaryIconBg = useThemeColor("primaryIconBg");
   const info = useThemeColor("info");
   const text = useThemeColor("text");
+  const dashboardCardBg = useThemeColor("dashboardCardBg");
+  const dashboardCardIconBg = useThemeColor("dashboardCardIconBg");
+  const dashboardCardTitle = useThemeColor("dashboardCardTitle");
+  const dashboardCardValue = useThemeColor("dashboardCardValue");
   const focusedBg = useThemeColor("focusedBg");
   const focusedContent = useThemeColor("focusedContent");
   const success = useThemeColor("success");
@@ -72,6 +76,10 @@ export const useThemeColors = () => {
     primaryIconBg,
     info,
     text,
+    dashboardCardBg,
+    dashboardCardIconBg,
+    dashboardCardTitle,
+    dashboardCardValue,
     focusedBg,
     focusedContent,
     success,

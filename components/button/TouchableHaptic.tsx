@@ -24,11 +24,40 @@ export type TouchableHapticProps = React.PropsWithChildren & {
 }
 
 /**
+ * @description Handles the onPress event with haptic feedback
+ * @since 0.0.6
+ * @version 0.0.1
+ * @param {Function} param0.onPress - Callback function when user pressed the button
+ * @param {GestureResponderEvent} param0.e - Gesture responder event
+ * @function */
+export const onPressHaptic = 
+  (onPress: (e: GestureResponderEvent) => void) => 
+  (e: GestureResponderEvent) => {
+    onPress?.(e);
+    if (!isWeb()) Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+}
+
+/**
+ * @description Handles the onLongPress event with haptic feedback
+ * @since 0.0.6
+ * @version 0.0.1
+ * @param {Function} param0.onLongPress - Callback function when user long presses the button
+ * @param {GestureResponderEvent} param0.e - Gesture responder event
+ * @function */
+export const onLongPressHaptic = 
+  (onLongPress: (e: GestureResponderEvent) => void) => 
+  (e: GestureResponderEvent) => {
+    onLongPress?.(e);
+    if (!isWeb()) Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+  }
+
+
+/**
  * @public
  * @author Marc Stöckli - Codemize GmbH 
  * @description Returns a touchable (opacity) button with included haptic gesture -> Only for platform iOs/android
  * @since 0.0.1
- * @version 0.0.1
+ * @version 0.0.2
  * @param {Object} param0 - Handles the touchable haptic events and styling
  * @param {Function} param0.onPress - Callback function when user pressed the button
  * @param {Function} param0.onLongPress - Callback function when user long presses the button
@@ -51,31 +80,6 @@ const TouchableHaptic = React.forwardRef<View, TouchableHapticProps>(({
   hideNotificationBadge = true,
   children 
 }, ref) => {
-  /**
-   * @private
-   * @description Handles the onPress event
-   * @function */
-  const onPressInternal = React.useCallback((e: GestureResponderEvent) => {
-    onPress?.(e);
-
-    /**
-     * @description Haptics is not supported in web browser!
-     * -> Err: he method or property Haptic.impactAsync is not available on web, are you sure you've linked all the native dependencies properly? */
-    if (!isWeb()) Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-  }, []);
-
-  /**
-   * @private
-   * @description Handles the onLongPress event
-   * @function */
-  const onLongPressInternal = React.useCallback((e: GestureResponderEvent) => {
-    onLongPress?.(e);
-    /**
-     * @description Haptics is not supported in web browser!
-     * -> Err: he method or property Haptic.impactAsync is not available on web, are you sure you've linked all the native dependencies properly? */
-    if (!isWeb()) Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-  }, []);
-
   return (
     <>
     {visible && <NotificationBadge hide={hideNotificationBadge}>
@@ -85,8 +89,8 @@ const TouchableHaptic = React.forwardRef<View, TouchableHapticProps>(({
         hitSlop={hitSlop}
         disabled={disabled}
         onLayout={onLayout}
-        onPress={onPressInternal}
-        onLongPress={onLongPressInternal}>
+        onPress={onPressHaptic(onPress)}
+        onLongPress={onLongPressHaptic(onLongPress)}>
           {children}
       </Pressable>
     </NotificationBadge>}
