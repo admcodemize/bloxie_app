@@ -6,17 +6,19 @@
     "routes": {
       "index": "Dashboard",
       "calendar": "Kalender",
-      "contact": "Kontakte",
       "team": "Team"
     },
     "list": {
       "active": "Aktiv"
     },
+    "calendar": {
+      "week": "KW"
+    },
     "dropdown": {
       "dashboard": {
         "calendar": {
-          "last7Days": "Letzte 7 Tage",
           "last30Days": "Letzte 30 Tage",
+          "last90Days": "Letzte 90 Tage",
           "allTime": "Gesamter Zeitraum"
         }
       }
@@ -30,43 +32,54 @@
         "statistics": {
           "title": "Statistiken",
           "description": "Überblick der wichtigsten Daten zur Performance und Effizienz deiner Termine und Buchungen.",
-          "pointer": {
-            "income": "Einkommen"
+          "cards": {
+            "income": "Einkommen",
+            "freeSlots": "Freie Slots",
+            "newAppointments": "Neue Termine",
+            "confirmedAppointments": "Bestätigungen",
+            "rejectedAppointments": "Ablehnungen"
           }
         }
-      }
-    },
-    "sheets": {
-      "create": {
+      },
+      "trayAction": {
         "title": "Aktionen",
+        "description": "Anlegen oder Verwalten",
         "groups": {
-          "manage": "Verwalten",
+          "manage": "Allgemein",
           "configuration": "Konfiguration"
         },
         "items": {
+          "booking": {
+            "title": "Buchung",
+            "description": "Buchung von Terminen mittels Termintyp"
+          },
           "meeting": {
-            "title": "Termin/Besprechung",
-            "description": "Persönlich organisierte Termine/Besprechungen"
+            "title": "Termin",
+            "description": "Einmalige Termine ohne Wiederholung."
           },
           "type": {
-            "title": "Typ",
-            "description": "Verwendung für neue Termine/Besprechungen"
+            "title": "Termintypen",
+            "description": "Verwendung für neue Termine auf der öffentlichen Buchungsseite."
           },
-          "contact": {
-            "title": "Kontakt",
-            "description": "Kunden/Partner/Bekannte Personen"
-          },
-          "employee": {
+          "team": {
             "title": "Mitarbeiter",
-            "description": "Buchbare Mitarbeiter innerhalb der Organisation"
+            "description": "Aktive Mitarbeiter innerhalb der Organisation."
           },
-          "availability": {
-            "title": "Verfügbarkeiten",
-            "description": "Wochen-/Datumsbasierte Anwesenheitszeiten"
+          "poll": {
+            "title": "Umfrage",
+            "description": "Finde einen passenden Termin für mehrere Teilnehmer"
           },
           "bookingPage": {
             "title": "Buchungsseite",
             "description": "Öffentlicher Kalender deiner buchbaren Termine"
+          },
+          "workflow": {
+            "title": "Workflow",
+            "description": "Automatisierte Prozesse für deine Buchungen"
+          },
+          "availability": {
+            "title": "Verfügbarkeiten",
+            "description": "Wochen-/Datumsbasierte Anwesenheitszeiten"
           }
         }
       }

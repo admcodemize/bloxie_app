@@ -9,8 +9,7 @@ import { StyleSheet } from "react-native";
  * @version 0.0.1 */
 const ListItemWithChildrenStyle = StyleSheet.create({
   border: {
-    borderRadius: 8,
-    padding: 4
+    borderRadius: 8
   }
 })
 

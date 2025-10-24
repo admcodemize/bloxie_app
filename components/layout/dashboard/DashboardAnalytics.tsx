@@ -2,7 +2,7 @@ import { t } from "i18next";
 import React from "react";
 import { GestureResponderEvent, View } from "react-native";
 
-import { faChartNetwork, faRotate, faUserSecret } from "@fortawesome/duotone-thin-svg-icons";
+import { faUsersBetweenLines, faRotate, faUserSecret } from "@fortawesome/duotone-thin-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 import { DROPDOWN_DASHBOARD_PERIOD } from "@/constants/Models";
@@ -103,7 +103,7 @@ const DashboardAnalytics = ({
         <View style={[GlobalContainerStyle.rowCenterStart, { gap: STYLES.sizeGap }]}>
           <TouchableHapticDropdown
             ref={refTeams}
-            icon={faChartNetwork as IconProp}
+            icon={faUsersBetweenLines as IconProp}
             text={"codemize.com"}
             backgroundColor={primaryBgColor}
             onPress={onPressDropdown(refTeams)(<TouchableDropdownBaseTeams onPress={onPressTeams} />)} />
@@ -158,7 +158,7 @@ const TouchableDropdownBaseTeams = ({
       <TouchableDropdownItemBase
         key={0}
         itemKey={0}
-        icon={faChartNetwork as IconProp}
+        icon={faUsersBetweenLines as IconProp}
         text="codemize.com"
         isSelected={dropdown.itemKeyTeam === 0}
         onPress={onPressItem} />

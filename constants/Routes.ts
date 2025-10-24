@@ -1,14 +1,12 @@
 import {
-  faAddressBook as faAddressBookDuotone,
   faCalendar as faCalendarDuotone,
-  faChartNetwork as faChartNetworkDuotone,
+  faUsersBetweenLines as faUsersBetweenLinesDuotone,
   faObjectsColumn as faObjectsColumnDuotone
 } from "@fortawesome/duotone-thin-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import {
-  faAddressBook as faAddressBookSolid,
   faCalendar as faCalendarSolid,
-  faChartNetwork as faChartNetworkSolid,
+  faUsersBetweenLines as faUsersBetweenLinesSolid,
   faObjectsColumn as faObjectsColumnSolid
 } from "@fortawesome/pro-thin-svg-icons";
 
@@ -46,13 +44,8 @@ export const ROUTES_PRIVATE_HEADER: RoutesPrivateHeader[] = [{
   iconDuotone: faCalendarDuotone as IconProp,
   iconSolid: faCalendarSolid as IconProp,
 }, {
-  name: "contact",
-  title: "i18n.routes.contact",
-  iconDuotone: faAddressBookDuotone as IconProp,
-  iconSolid: faAddressBookSolid as IconProp,
-}, {
   name: "team",
   title: "i18n.routes.team",
-  iconDuotone: faChartNetworkDuotone as IconProp,
-  iconSolid: faChartNetworkSolid as IconProp,
+  iconDuotone: faUsersBetweenLinesDuotone as IconProp,
+  iconSolid: faUsersBetweenLinesSolid as IconProp,
 }];

@@ -38,7 +38,7 @@ export const useThemeColor = (
  * @author Marc Stöckli - Codemize GmbH 
  * @description Returns theme based colors
  * @since 0.0.1
- * @version 0.0.4
+ * @version 0.0.5
  * @function */
 export const useThemeColors = () => {
   const primaryBgColor = useThemeColor("primaryBg");
@@ -52,6 +52,7 @@ export const useThemeColors = () => {
   const primaryIconBg = useThemeColor("primaryIconBg");
   const info = useThemeColor("info");
   const text = useThemeColor("text");
+  const label = useThemeColor("label");
   const dashboardCardBg = useThemeColor("dashboardCardBg");
   const dashboardCardIconBg = useThemeColor("dashboardCardIconBg");
   const dashboardCardTitle = useThemeColor("dashboardCardTitle");
@@ -63,6 +64,8 @@ export const useThemeColors = () => {
   const warning = useThemeColor("warning");
   const information = useThemeColor("information");
   const pointerComponent = useThemeColor("pointerComponent");
+  const weekendBgColor = useThemeColor("weekendBgColor");
+  const todayBgColor = useThemeColor("todayBgColor");
 
   return {
     primaryBgColor,
@@ -76,6 +79,7 @@ export const useThemeColors = () => {
     primaryIconBg,
     info,
     text,
+    label,
     dashboardCardBg,
     dashboardCardIconBg,
     dashboardCardTitle,
@@ -86,6 +90,8 @@ export const useThemeColors = () => {
     error,
     warning,
     information,
-    pointerComponent
+    pointerComponent,
+    weekendBgColor,
+    todayBgColor
   }
 }

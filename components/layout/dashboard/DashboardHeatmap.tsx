@@ -1,14 +1,19 @@
 import TouchableHaptic from "@/components/button/TouchableHaptic";
+import { STYLES } from "@/constants/Styles";
 import GlobalContainerStyle from "@/styles/GlobalContainer";
 import { addDays, differenceInMinutes, eachDayOfInterval, getDay, isAfter, isBefore, isWithinInterval, max, min, parseISO } from "date-fns";
 import React, { useMemo } from "react";
 import { Dimensions, View } from "react-native";
+import { useTrays } from "react-native-trays";
 
 const DIM = Dimensions.get("window");
-const HEIGHT = 100;
+const HEIGHT = 110;
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const HOURS = Array.from({ length: 23 }, (_, i) => i);
 const CELL_GAP = 2;
+
+/** @todo Refactor the whole component!! */
+
 
 type Event = {
   userId: string;
@@ -109,20 +114,22 @@ export default function DashboardHeatmap({ events }: { events: Event[] }) {
   const cellHeight = (HEIGHT - totalVGap) / totalRows;
 
   return (
+    <View style={{ gap: STYLES.sizeGap }}>
     <View style={[GlobalContainerStyle.rowStartStart, { width: DIM.width, height: HEIGHT }]}>
       <View style={{ flexDirection: "column" }}>
         {WEEKDAYS.map((day, idx) => (
           <View
             key={day}
-            style={[GlobalContainerStyle.rowStartStart, { marginBottom: idx === WEEKDAYS.length - 1 ? 0 : CELL_GAP }]}
-          >
+            style={[GlobalContainerStyle.rowStartStart, { marginBottom: idx === WEEKDAYS.length - 1 ? 0 : CELL_GAP }]}>
             {HOURS.map((hour, colIdx) => {
               const ratio = freeSlots[`${day}-${hour}`] ?? 1;
               const color = getColor(ratio);
               return (
                 <TouchableHaptic
                   key={`${day}-${hour}`}
-                  onPress={() => console.log(`${day}-${hour}: ratio=${ratio.toFixed(2)}`)}
+                  onPress={() => {
+                    
+                  }}
                   style={{
                     width: cellWidth,
                     height: cellHeight,
@@ -136,6 +143,32 @@ export default function DashboardHeatmap({ events }: { events: Event[] }) {
           </View>
         ))}
       </View>
+    </View>
+      {/*<View style={[GlobalContainerStyle.rowStartStart, { marginTop: 4, gap: 8 }]}>
+        {[0, 0.25, 0.5, 0.75, 1.0].map((busyRatio) => {
+          const freeRatio = 1 - busyRatio;
+          const color = getColor(freeRatio);
+          const percentage = Math.round(busyRatio * 100);
+          return (
+            <View
+              key={busyRatio}
+              style={[GlobalContainerStyle.rowCenterCenter, { gap: 4 }]}>
+              <View
+                style={{
+                  width: 14,
+                  height: 14,
+                  backgroundColor: color,
+                  borderRadius: 4,
+                }}
+              />
+              <TextBase 
+                text={`${percentage}%`} 
+                style={[GlobalTypographyStyle.labelText, { fontSize: 10, color: "#5E5E5E" }]} 
+              />
+            </View>
+          );
+        })}
+      </View>*/}
     </View>
   );
 }

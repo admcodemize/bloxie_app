@@ -6,6 +6,7 @@ import ScreenTimeZone from "@/screens/private/modal/TimeZone";
  * @author Marc Stöckli - Codemize GmbH 
  * @since 0.0.1
  * @version 0.0.1
+ * @deprecated This screen at the moment is not used anymore. Will be added back in a future version.
  * @component */
 const ModalTimeZone = () => {
   return (

@@ -25,6 +25,9 @@ type StylesProps = {
   paddingVertical: number;
   marginHorizontal: number;
   layoutFooterHeight: number;
+  calendarHourHeight: number;
+  calendarHourWidth: number;
+  calendarHourBorderHeight: number;
 }
 
 /**
@@ -53,5 +56,8 @@ export const STYLES = <StylesProps>{
   paddingHorizontal: 14,
   paddingVertical: 10,
   marginHorizontal: 20,
-  layoutFooterHeight: 50
+  layoutFooterHeight: 50,
+  calendarHourHeight: 60,
+  calendarHourWidth: 60,
+  calendarHourBorderHeight: 1
 }

@@ -1,7 +1,7 @@
 import { faArrowUpRightFromSquare } from "@fortawesome/duotone-thin-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Pressable, View, ViewStyle } from "react-native";
+import { GestureResponderEvent, Pressable, View, ViewStyle } from "react-native";
 
 import { STYLES } from "@/constants/Styles";
 import { useThemeColors } from "@/hooks/theme/useThemeColor";
@@ -40,7 +40,7 @@ export type DashboardCardProps = {
   percentageType?: DashboardCardPercentageType;
   showDetails?: boolean;
   onPressDetails?: () => void;
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   style?: ViewStyle;
 }
 
@@ -48,7 +48,7 @@ export type DashboardCardProps = {
  * @public
  * @author Marc Stöckli - Codemize GmbH 
  * @since 0.0.6
- * @version 0.0.1
+ * @version 0.0.2
  * @param {DashboardCardProps} param0
  * @param {IconProp} param0.icon - The icon of the card
  * @param {string} param0.title - The title of the card

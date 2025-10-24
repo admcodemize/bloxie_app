@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, ViewStyle } from "react-native";
 
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -25,6 +25,7 @@ type TouchableHapticIconProps = TouchableHapticProps & {
   hideBorder?: boolean;
   backgroundColor?: string;
   iconColor?: string;
+  styleView?: ViewStyle|ViewStyle[];
 }
 
 /**
@@ -37,7 +38,8 @@ type TouchableHapticIconProps = TouchableHapticProps & {
  * @param {Function} param0.onPress - Callback function when user pressed the button
  * @param {Function} param0.onLongPress - Callback function when user long presses the button
  * @param {Function} param0.onLayout - Callback function invoked on mount and layout changes 
- * @param {StyleProp<ViewStyle>} param0.style - Extended custom styling
+ * @param {StyleProp<ViewStyle>} param0.style - Extended custom styling for the touchable haptic
+ * @param {StyleProp<ViewStyle>} param0.styleView - Extended custom styling for the view
  * @param {boolean} param0.disabled - Handles the inactivity of the rendered button
  * @param {number|Insets|null|undefined} param0.hitSlop - Handles the hit slop of the rendered button. 
  * -> A hit slop is a property that allows you to set the area around the button that will trigger the onPress event.
@@ -52,6 +54,7 @@ const TouchableHapticIcon = React.forwardRef<View, TouchableHapticIconProps>(({
   onLongPress = () => {}, 
   onLayout = () => {},
   style, 
+  styleView,
   disabled, 
   hitSlop = 10,
   hideNotificationBadge = true,
@@ -77,7 +80,7 @@ const TouchableHapticIcon = React.forwardRef<View, TouchableHapticIconProps>(({
           backgroundColor: backgroundColor ? backgroundColor : hideBorder ? primaryBgColor : secondaryBgColor,
           borderColor: primaryBorderColor,
           borderWidth: hideBorder ? 0 : 1
-        }]}>
+        }, styleView]}>
           <FontAwesomeIcon
             icon={icon}
             size={iconSize}

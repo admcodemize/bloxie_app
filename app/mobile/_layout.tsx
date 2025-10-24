@@ -2,6 +2,7 @@ import * as Sentry from '@sentry/react-native';
 import * as React from 'react';
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { TrayProvider } from 'react-native-trays';
 
 import { Inter_100Thin, Inter_300Light, Inter_500Medium, Inter_600SemiBold, Inter_800ExtraBold, useFonts } from '@expo-google-fonts/inter';
 import { Slot, useRouter, useSegments } from 'expo-router';
@@ -9,6 +10,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from 'expo-status-bar';
 
 import { isNetworkConnected } from "@/helpers/Network";
+import { stackConfigs, trays } from "@/helpers/Trays";
 
 import SafeAreaContextViewBase from '@/components/container/SafeAreaContextView';
 
@@ -35,7 +37,7 @@ SplashScreen.preventAutoHideAsync();
  * @description Slot will render the current child route, think of this like the children prop in React. 
  * This component can be wrapped with other components to create a layout. 
  * @since 0.0.1
- * @version 0.0.1
+ * @version 0.0.2
  * @component */
 const StartSlot = () => {
   /**
@@ -58,9 +60,13 @@ const StartSlot = () => {
 
   return (
     <SafeAreaContextViewBase>
-      <DropdownProvider>
-        <Slot /> 
-      </DropdownProvider>
+      <TrayProvider 
+        stackConfigs={stackConfigs}
+        trays={trays}>
+        <DropdownProvider>
+          <Slot /> 
+        </DropdownProvider>
+      </TrayProvider>
     </SafeAreaContextViewBase>
   )
 }

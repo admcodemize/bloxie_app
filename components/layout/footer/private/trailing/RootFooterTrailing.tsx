@@ -1,6 +1,6 @@
-import { router } from "expo-router";
 import React from "react";
 import { View } from "react-native";
+import { useTrays } from "react-native-trays";
 
 import { faEllipsisStrokeVertical, faGrid2Plus, faPlug } from "@fortawesome/duotone-thin-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
@@ -32,9 +32,14 @@ const RootFooterTrailing = ({
 
 }: RootFooterTrailingProps) => {
   /**
-   * @description Handles the on press event for opening the create modal
+   * @description Handles the opening of the trays which are defined in the @/helpers/Trays.tsx file as screens in the @/screens/private/tray folder
+   * @see {@link @/helpers/Trays} */
+  const { push } = useTrays('main');
+
+  /**
+   * @description Handles the on press event for opening the action tray
    * @function */
-  const onPressCreate = React.useCallback(() => router.push("/(private)/(modal)/create"), []);
+  const onPressAction = React.useCallback(() => push("ActionTray", {}), []);
 
   return (
     <View style={[GlobalContainerStyle.rowCenterCenter, { gap: STYLES.sizeGap }]}>
@@ -43,7 +48,7 @@ const RootFooterTrailing = ({
         onPress={() => {}} />
       <TouchableHapticIcon
         icon={faGrid2Plus as IconProp}
-        onPress={onPressCreate} />
+        onPress={onPressAction} />
       <Divider vertical />
       <TouchableHapticIcon
         icon={faEllipsisStrokeVertical as IconProp}

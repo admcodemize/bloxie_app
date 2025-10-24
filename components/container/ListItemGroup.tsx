@@ -24,7 +24,7 @@ export type ListItemGroupProps = PropsWithChildren & {
  * @public
  * @author Marc Stöckli - Codemize GmbH 
  * @since 0.0.1
- * @version 0.0.2
+ * @version 0.0.3
  * @description A container for a group of settings
  * -> Used for components such as ListItemWithChildren or all the other components that are registered in the path components/list/..
  * @param {ListItemGroupProps} param0
@@ -38,15 +38,14 @@ const ListItemGroup = ({
   children,
   style
 }: ListItemGroupProps) => {
-  const { info } = useThemeColors();
-
   return (
     <View style={[style, { gap }]}>
       {title && <TextBase 
         text={title}
+        type="label"
         style={[GlobalTypographyStyle.standardText, { 
-        color: info, 
-        paddingLeft: 8
+          fontSize: 9,
+          textTransform: "uppercase"
       }]} />}
       {children}
     </View>

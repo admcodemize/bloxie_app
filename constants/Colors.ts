@@ -16,7 +16,7 @@ export const COLORS = {
     label: "#999999",
     text: '#303030',
     title: "#1B1B1B",
-    subtitle: "#FFF",
+    subtitle: "#303030",
     focusedBg: "#303030",
     focusedContent: "#fff",
     dashboardCardBg: "#e7e7e7",
@@ -25,19 +25,20 @@ export const COLORS = {
     dashboardCardValue: "#1B1B1B",
     success: "#159F85",
     error: "#D15555",
-    warning: "#D76F00",
-    information: "#0092F9",
-    pointerComponent: "black",
+    warning: "#e09100",
+    information: "#047dd4",
+    pointerComponent: "#000",
     primaryBg: "#fff",
     secondaryBg: "#F3F3F3",
-    tertiaryBg: "#F3F3F3",
+    tertiaryBg: "#f8f8f8",
     primaryBorder: "#E3E3E3",
     secondaryBorder: "#CACACA",
     tertiaryBorder: "#D1D1D1",
     primaryIcon: "#303030",
-    secondaryIcon: "#fff",
+    secondaryIcon: "#626D7B",
     primaryIconBg: "#fff",
-    
+    weekendBgColor: "#5E5E5E",
+    todayBgColor: "#047dd4"
   },
   dark: {
     info: "#626D7B",
@@ -65,6 +66,8 @@ export const COLORS = {
     primaryIcon: "#626D7B",
     secondaryIcon: "#fff",
     primaryIconBg: "#1f2127",
+    weekendBgColor: "#5E5E5E",
+    todayBgColor: "#303030"
   },
 };
 

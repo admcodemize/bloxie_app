@@ -1,52 +1,38 @@
-import { STYLES } from "@/constants/Styles";
-import GlobalContainerStyle from "@/styles/GlobalContainer";
-import GlobalTypographyStyle from "@/styles/GlobalTypography";
-import { faChevronLeft, faXmark } from "@fortawesome/duotone-thin-svg-icons";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { router } from "expo-router";
 import React from "react";
 import { View } from "react-native";
-import TouchableHapticIcon from "../button/TouchableHaptichIcon";
-import TextBase from "../typography/Text";
-import Divider from "./Divider";
+
+import { STYLES } from "@/constants/Styles";
+
+import TouchableHapticClose from "@/components/button/TouchableHapticClose";
+import TextBase from "@/components/typography/Text";
+
+import GlobalContainerStyle from "@/styles/GlobalContainer";
+import GlobalTypographyStyle from "@/styles/GlobalTypography";
 
 /**
  * @public
  * @author Marc Stöckli - Codemize GmbH 
  * @since 0.0.1
- * @version 0.0.1
- * @enum */
-export enum StackModalHeaderPresentationEnum {
-  modal = "modal",
-  card = "card"
-}
-
-/**
- * @public
- * @author Marc Stöckli - Codemize GmbH 
- * @since 0.0.1
- * @version 0.0.1
+ * @version 0.0.2
  * @type */
 export type StackModalHeaderProps = {
-  icon: IconProp;
   title: string;
-  presentation?: StackModalHeaderPresentationEnum;
+  description?: string;
 }
 
 /**
  * @public
  * @author Marc Stöckli - Codemize GmbH 
  * @since 0.0.1
- * @version 0.0.1
+ * @version 0.0.2
  * @param {StackModalHeaderProps} param0
- * @param {IconProp} param0.icon - The icon to display
  * @param {string} param0.title - The title to display
- * @param {StackModalHeaderPresentationEnum} param0.presentation - The presentation of the header handles the type of the back/close icon to display
+ * @param {string} param0.description - The description to display
  * @component */
 const StackModalHeader = ({
-  icon,
   title,
-  presentation = StackModalHeaderPresentationEnum.modal
+  description,
 }: StackModalHeaderProps) => {
   /**
    * @description Handles the on press event for the close/back button
@@ -54,25 +40,19 @@ const StackModalHeader = ({
   const onPressClose = React.useCallback(() => router.back(), []);
 
   return (
-    <View style={[GlobalContainerStyle.rowStartBetween, { paddingHorizontal: STYLES.paddingHorizontal }]}>
-      <View style={[GlobalContainerStyle.rowCenterStart, GlobalContainerStyle.sizeGap]}>
-        <Divider 
-          vertical
-          style={{ backgroundColor: "#3EFDC3", width: 2, height: 20 }} />
-        <TouchableHapticIcon
-          icon={icon}
-          disabled={true}
-          onPress={() => {}} />
+    <View style={{ paddingHorizontal: STYLES.paddingHorizontal, paddingBottom: STYLES.paddingVertical, gap: 4 }}>
+      <View style={[GlobalContainerStyle.rowCenterBetween]}> 
         <TextBase 
           text={title}
-          style={GlobalTypographyStyle.titleSubtitle} />
+          style={[GlobalTypographyStyle.headerSubtitle, { fontSize: 12 }]} />
+        <TouchableHapticClose onPress={onPressClose} />
       </View>
-      <View style={[GlobalContainerStyle.rowCenterStart, GlobalContainerStyle.sizeGap]}>
-      <TouchableHapticIcon
-          hideBorder
-          icon={presentation === StackModalHeaderPresentationEnum.modal ? faXmark as IconProp : faChevronLeft as IconProp}
-          onPress={onPressClose} />
-      </View>
+      {description && <TextBase 
+        type="label" 
+        text={description} 
+        numberOfLines={3}
+        ellipsizeMode={"tail"}
+        style={[GlobalTypographyStyle.labelText]} />}
     </View>
   )
 }

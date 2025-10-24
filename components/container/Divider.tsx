@@ -32,7 +32,7 @@ const Divider = ({
   return (
     <View style={[{
       backgroundColor: primaryBorderColor,
-      height: vertical ? 14 : undefined,
+      height: vertical ? 14 : 1,
       width: vertical ? 1 : "100%",
     }, style]} />
   )

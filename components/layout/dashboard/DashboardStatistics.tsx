@@ -1,17 +1,21 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
-
-import { STYLES } from "@/constants/Styles";
-
-import ChartLineArea, { ChartLineAreaDataProps } from "@/components/chart/ChartLineArea";
-import { ChartLineAreaPointer, INITIAL_CHART_POINTER_ITEM } from "@/components/chart/ChartLineAreaPointer";
-import DashboardCard, { DashboardCardPercentageType } from "@/components/layout/dashboard/DashboardCard";
-import TitleWithDescription from "@/components/typography/TitleWithDescription";
-import GlobalContainerStyle from "@/styles/GlobalContainer";
+import { GestureResponderEvent, View } from "react-native";
 import { faCalendarCheck, faCheckDouble, faStopwatch, faWallet, faXmark } from "@fortawesome/duotone-thin-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import DashboardHeatmap from "./DashboardHeatmap";
+
+import { STYLES } from "@/constants/Styles";
+import { useDashboardContextStore } from "@/context/DashboardContext";
+
+import DashboardHeatmap from "@/components/layout/dashboard/DashboardHeatmap";
+import ChartLineArea, { ChartLineAreaDataProps } from "@/components/chart/ChartLineArea";
+import { ChartLineAreaPointer } from "@/components/chart/ChartLineAreaPointer";
+import DashboardCard, { DashboardCardPercentageType } from "@/components/layout/dashboard/DashboardCard";
+import TitleWithDescription from "@/components/typography/TitleWithDescription";
+
+import GlobalContainerStyle from "@/styles/GlobalContainer";
+
+/** @todo Refactor the whole component!! */
 
 /**
  * @public
@@ -48,31 +52,14 @@ const DashboardStatistics = ({
 }: DashboardStatisticsProps) => {
   const { t } = useTranslation();
 
-  const [data, setData] = React.useState(() => {
-    const data = [];
-    const today = new Date();
-    let currentValue = 120; // Start with a mid-range value
-    
-    for (let i = 30; i >= 0; i--) {
-      const date = new Date(today);
-      date.setDate(today.getDate() - i);
-      
-      // Generate small random change between -15 and +15
-      const change = (Math.random() * 30) - 10;
-      currentValue = Math.max(20, Math.min(240, currentValue + change));
-      
-      data.push({
-        value: Math.floor(currentValue),
-        now: date,
-        dataPointLabel: `${currentValue.toFixed(2)}`,
-      });
-    }
-    
-    return data;
-  })
 
-  /** @description The initial item that the pointer component is pointing to */
-  const [chartPointerItem, setChartPointerItem] = React.useState<ChartLineAreaDataProps>(INITIAL_CHART_POINTER_ITEM);
+  const setChartProperties = useDashboardContextStore((state) => state.setChartProperties);
+
+  const onPressCard = React.useCallback(
+    (title: string, showCurrency: boolean) => 
+    (e: GestureResponderEvent) => {
+    setChartProperties(title, showCurrency);
+  }, [setChartProperties]);
 
   /** 
    * @description The style of a specific card 
@@ -86,67 +73,59 @@ const DashboardStatistics = ({
       <TitleWithDescription
         title={"Zeitachse"}
         description={"Klicken Sie auf eine der nachfolgenden Statistiken um eine zeitliche Übersicht zu erhalten."} />
-      <ChartLineAreaPointer
-        title={t("i18n.screens.dashboard.statistics.pointer.income")}
-        value={chartPointerItem.value.toFixed(2)}
-        now={chartPointerItem.now}
-        showCurrency={true} />
-      <ChartLineArea
-        data={data}
-        showReferenceLine1={true}
-        showCurrency={true}
-        onPointerComponentMove={setChartPointerItem}
-        pointerComponentColor="#75B39B"
-        pointerStripColor="#75B39B"
-        startFillColor="#75B39B"
-        endFillColor="#8ad3b7" />
+      <DashboardStatisticsChart />
       <TitleWithDescription
         title={t("i18n.screens.dashboard.statistics.title")}
         description={t("i18n.screens.dashboard.statistics.description")} />
       <DashboardCard
         icon={faWallet as IconProp}
-        title="Einkommen"
+        title={t("i18n.screens.dashboard.statistics.cards.income")}
         value="59'490.00 CHF"
         percentage="3.5"
         percentageType={DashboardCardPercentageType.upwards}
         showDetails={true}
+        onPress={onPressCard("i18n.screens.dashboard.statistics.cards.income", true)}
         onPressDetails={() => { console.log("details") }} />
       <View style={[GlobalContainerStyle.rowCenterStart, { gap: STYLES.sizeGap }]}>
         <DashboardCard
           icon={faStopwatch as IconProp}
-          title="Freie Slots"
+          title={t("i18n.screens.dashboard.statistics.cards.freeSlots")}
           value="48"
           percentage="4"
           percentageType={DashboardCardPercentageType.downwards}
+          onPress={onPressCard("i18n.screens.dashboard.statistics.cards.freeSlots", false)}
           style={cardStyle} />
         <DashboardCard
           icon={faCalendarCheck as IconProp}
-          title="Neue Termine"
+          title={t("i18n.screens.dashboard.statistics.cards.newAppointments")}
           value="50"
           percentage="23"
           percentageType={DashboardCardPercentageType.downwards}
+          onPress={onPressCard("i18n.screens.dashboard.statistics.cards.newAppointments", false)}
           style={cardStyle} />
       </View>
       <View style={[GlobalContainerStyle.rowCenterStart, { gap: STYLES.sizeGap }]}>
         <DashboardCard
           icon={faCheckDouble as IconProp}
-          title="Bestätigungen"
+          title={t("i18n.screens.dashboard.statistics.cards.confirmedAppointments")}
           value="8"
           percentage="18"
           percentageType={DashboardCardPercentageType.downwards}
+          onPress={onPressCard("i18n.screens.dashboard.statistics.cards.confirmedAppointments", false)}
           style={cardStyle} />
         <DashboardCard
           icon={faXmark as IconProp}
-          title="Ablehnungen"
+          title={t("i18n.screens.dashboard.statistics.cards.rejectedAppointments")}
           value="4"
           percentage="34"
           percentageType={DashboardCardPercentageType.upwards}
+          onPress={onPressCard("i18n.screens.dashboard.statistics.cards.rejectedAppointments", false)}
           style={cardStyle} />
       </View>
       <View style={{ gap: STYLES.sizeGap, paddingTop: 10 }}>
       <TitleWithDescription
         title={"Buchungsaktivität"}
-        description={"Übersicht der freien Slots basierend der Wochentage/Stunden zum ausgewählten Zeitraum."} />
+        description={"Übersicht der gebuchten Slots basierend der Wochentage/Stunden zum ausgewählten Zeitraum."} />
       <DashboardHeatmap events={[
           // Woche 1 (14-16 Okt) - Montag bis Mittwoch (erweitert)
           { userId: "1", start: "2025-10-14T06:00:00Z", end: "2025-10-14T06:30:00Z", title: "Early Standup" },
@@ -339,6 +318,73 @@ const DashboardStatistics = ({
         ]} />
       </View>
     </View>
+  )
+}
+
+/**
+ * @public
+ * @author Marc Stöckli - Codemize GmbH 
+ * @since 0.0.7
+ * @version 0.0.1
+ * @description The chart component for the dashboard statistic cards
+ * -> The informations for the chart are stored in the dashboard context "DashboardContext"
+ * @component */
+const DashboardStatisticsChart = () => {
+  /**
+   * @description Contains the title and the line area data for the chart
+   */
+  const chart = useDashboardContextStore((state) => state.chart);
+
+  /** @description The initial item that the pointer component is pointing to */
+  const [lineAreaData, setLineAreaData] = React.useState<ChartLineAreaDataProps>(chart.lineAreaData);
+
+  const generateData = () => {
+    const data = [];
+    const today = new Date();
+    let currentValue = 120; // Start with a mid-range value
+    
+    for (let i = 30; i >= 0; i--) {
+      const date = new Date(today);
+      date.setDate(today.getDate() - i);
+      
+      // Generate small random change between -15 and +15
+      const change = (Math.random() * 30) - 10;
+      currentValue = Math.max(20, Math.min(240, currentValue + change));
+      
+      data.push({
+        value: Math.floor(currentValue),
+        now: date,
+        dataPointLabel: `${currentValue.toFixed(2)}`,
+      });
+    }
+    
+    return data;
+  }
+  const [data, setData] = React.useState(() => {
+    return generateData();
+  });
+
+  React.useLayoutEffect(() => {
+    setData(generateData());
+  }, [chart.title]);
+
+  return (
+    <>
+    <ChartLineAreaPointer
+      title={chart.title}
+      value={chart.showCurrency ? lineAreaData.value.toFixed(2) : lineAreaData.value.toString()}
+      now={lineAreaData.now}
+      showCurrency={chart.showCurrency} />
+    <ChartLineArea
+      data={data}
+      showReferenceLine1={true}
+      showCurrency={chart.showCurrency}
+      onPointerComponentMove={setLineAreaData}
+      pointerComponentColor="#75B39B"
+      pointerStripColor="#75B39B"
+      startFillColor="#75B39B"
+      endFillColor="#8ad3b7"/>
+    </>
   )
 }
 

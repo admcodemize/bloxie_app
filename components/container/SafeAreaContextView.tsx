@@ -9,7 +9,7 @@ import { useThemeColor } from "@/hooks/theme/useThemeColor";
  * @since 0.0.1
  * @version 0.0.1
  * @type */
-export type SafeAreaViewSchemeProperty = "primaryBg" | "secondaryBg";
+export type SafeAreaViewSchemeProperty = "primaryBg" | "secondaryBg" | "tertiaryBg";
 
 /**
  * @public

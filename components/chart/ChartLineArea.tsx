@@ -11,6 +11,7 @@ import TextBase from "@/components/typography/Text";
 
 import GlobalTypographyStyle from "@/styles/GlobalTypography";
 import ChartLineAreaStyle from "@/styles/components/chart/ChartLineArea";
+import Animated, { useAnimatedStyle, withTiming } from "react-native-reanimated";
 
 const DIM = Dimensions.get("window");
 
@@ -111,6 +112,15 @@ const ChartLineArea = ({
   const averageValue = data.reduce((acc, { value }) => acc + value, 0) / data.length;
   const averageLineY = height * (1 - (averageValue / chartMaxValue));
 
+  /**
+   * @description Animated style for the average line view
+   * Animates the top position smoothly when data changes */
+  const animatedAverageLineStyle = useAnimatedStyle(() => ({
+    top: withTiming(averageLineY, {
+      duration: 500,
+    }),
+  }));
+
   return (
     <View style={[ChartLineAreaStyle.view]}>
       <LineChart
@@ -161,9 +171,7 @@ const ChartLineArea = ({
             backgroundColor: pointerComponentColor || pointerComponent 
           }]} />
         }} />
-      {showReferenceLine1 && <View style={[ChartLineAreaStyle.averageLineView, { 
-        top: averageLineY 
-      }]}>
+      {showReferenceLine1 && <Animated.View style={[ChartLineAreaStyle.averageLineView, animatedAverageLineStyle]}>
         <HorizontalDashedLine strokeColor={`${focusedBg}80`} />
         <View style={[ChartLineAreaStyle.averageLineLabelView, {
           backgroundColor: focusedBg
@@ -176,7 +184,7 @@ const ChartLineArea = ({
             }]}
           />
         </View>
-      </View>}
+      </Animated.View>}
     </View>
   )
 }
