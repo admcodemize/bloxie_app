@@ -1,0 +1,40 @@
+# Root-level stuff that Next.js doesn't need
+
+# Mobile-specific directories
+../ios/
+../android/
+../.expo/
+
+# React Native specific
+../components/
+../screens/
+../styles/
+../hooks/
+../assets/
+../babel.config.js
+../metro.config.js
+../index.js
+
+# Dependencies (Next.js has its own)
+../node_modules/
+
+# Mobile configs
+../eas.json
+../app.json
+
+# Git and docs
+../.git/
+../readme.md
+../TODO.md
+
+# Mobile app code
+../app/mobile/
+
+# Keep shared code
+!../convex/
+!../constants/
+!../helpers/
+!../utils/
+!../types/
+!../context/
+!../i18n/
