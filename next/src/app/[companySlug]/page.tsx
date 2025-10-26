@@ -32,10 +32,11 @@ interface BookingPageProps {
 // Statische Parameter für ISR generieren
 export async function generateStaticParams() {
   try {
-    const companies = await convex.query(api.companies.getPublicCompanies);
+    /*const companies = await convex.query(api.companies.getPublicCompanies);
     return companies.map((company) => ({
       companySlug: company.slug,
-    }));
+    }));*/
+    return [];
   } catch (error) {
     console.error('Error generating static params:', error);
     return [];
@@ -47,9 +48,13 @@ export async function generateMetadata({ params }: BookingPageProps): Promise<Me
   const { companySlug } = await params;
   
   try {
-    const company = await convex.query(api.companies.getBySlug, { slug: companySlug });
+    return {
+      title: 'Termin buchen | Bloxie',
+      description: 'Online Terminbuchung',
+    };
+    //const company = await convex.query(api.companies.getBySlug, { slug: companySlug });
     
-    if (!company) {
+    /*if (!company) {
       return {
         title: 'Termin buchen | Bloxie',
         description: 'Online Terminbuchung',
@@ -65,7 +70,7 @@ export async function generateMetadata({ params }: BookingPageProps): Promise<Me
         type: 'website',
         ...(company.logo && { images: [company.logo] }),
       },
-    };
+    };*/
   } catch (error) {
     return {
       title: 'Termin buchen | Bloxie',
@@ -82,21 +87,21 @@ export default async function BookingPage({ params }: BookingPageProps) {
   let availableSlots: TimeSlot[] = [];
 
   try {
-    company = await convex.query(api.companies.getBySlug, { slug: companySlug });
+    //company = await convex.query(api.companies.getBySlug, { slug: companySlug });
     
-    if (!company) {
+    /*if (!company) {
       notFound();
-    }
+    }*/
 
     // Verfügbare Slots für die nächsten 30 Tage laden
     const startDate = new Date().toISOString().split('T')[0];
     const endDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
     
-    availableSlots = await convex.query(api.bookings.getAvailableSlots, {
+    /*availableSlots = await convex.query(api.bookings.getAvailableSlots, {
       companySlug,
       startDate,
       endDate,
-    });
+    });*/
 
   } catch (error) {
     console.error('Error loading booking data:', error);
@@ -105,7 +110,7 @@ export default async function BookingPage({ params }: BookingPageProps) {
 
   return (
     <div className={styles.container}>
-      <CompanyHeader company={company} />
+      {/*<CompanyHeader company={company} />*/}
       
       <main className={styles.main}>
         <div className={styles.bookingSection}>
