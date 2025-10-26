@@ -12,19 +12,12 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle);
  * @version 0.0.1
  * @type */
 export type ChartDonutProgressProps = {
-  /** @description Size of the donut chart in pixels */
   size?: number;
-  /** @description Stroke width (thickness of the ring) */
   strokeWidth?: number;
-  /** @description Progress value between 0 and 1 (0% to 100%) */
   progress: number;
-  /** @description Color for the filled portion */
   color?: string;
-  /** @description Background color for unfilled portion */
   backgroundColor?: string;
-  /** @description Whether to animate the progress */
   animated?: boolean;
-  /** @description Children to render in the center */
   children?: React.ReactNode;
 }
 
@@ -35,7 +28,14 @@ export type ChartDonutProgressProps = {
  * Perfect for showing booking slot availability on calendar days
  * @since 0.0.8
  * @version 0.0.1
- * @param {ChartDonutProgressProps} props
+ * @param {Object} param0 
+ * @param {number} param0.size - Size of the donut chart in pixels
+ * @param {number} param0.strokeWidth - Stroke width (thickness of the ring)
+ * @param {number} param0.progress - Progress value between 0 and 1 (0% to 100%)
+ * @param {string} param0.color - Color for the filled portion
+ * @param {string} param0.backgroundColor - Background color for unfilled portion
+ * @param {boolean} param0.animated - Whether to animate the progress
+ * @param {React.ReactNode} param0.children - Children to render in the center
  * @component */
 const ChartDonutProgress = ({
   size = 26,
@@ -63,9 +63,7 @@ const ChartDonutProgress = ({
         damping: 15,
         stiffness: 100,
       });
-    } else {
-      progressValue.value = clampedProgress;
-    }
+    } else progressValue.value = clampedProgress;
   }, [clampedProgress, animated]);
 
   /** @description Animated props for the progress circle */
@@ -77,8 +75,17 @@ const ChartDonutProgress = ({
   });
 
   return (
-    <View style={{ width: size, height: size, justifyContent: "center", alignItems: "center", backgroundColor, borderRadius: 13 }}>
-      <Svg width={size} height={size}>
+    <View style={{ 
+      width: size, 
+      height: size, 
+      justifyContent: "center", 
+      alignItems: "center", 
+      borderRadius: 13,
+      backgroundColor, 
+    }}>
+      <Svg 
+        width={size} 
+        height={size}>
         {/* Background circle */}
         <Circle
           cx={center}
@@ -100,11 +107,9 @@ const ChartDonutProgress = ({
           strokeDasharray={`${circumference} ${circumference}`}
           strokeLinecap="round"
           animatedProps={animatedProps}
-          rotation="-90"
-          origin={`${center}, ${center}`}
+          transform={`rotate(-90 ${center} ${center})`}
         />
       </Svg>
-      
       {/* Center content */}
       {children && (
         <View style={{ 
