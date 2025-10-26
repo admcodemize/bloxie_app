@@ -1,0 +1,42 @@
+# Root .vercelignore for Vercel deployment
+# This file ensures only necessary files are uploaded to Vercel
+
+# Mobile-specific directories
+ios/
+android/
+.expo/
+
+# React Native specific code
+components/
+screens/
+styles/
+hooks/
+assets/
+app/mobile/
+
+# React Native build configs
+babel.config.js
+metro.config.js
+index.js
+
+# Mobile configs
+eas.json
+app.json
+
+# Root dependencies (Next.js has its own)
+node_modules/
+
+# Git and docs
+.git/
+readme.md
+TODO.md
+
+# Keep shared backend and utilities
+!convex/
+!constants/
+!helpers/
+!utils/
+!types/
+!context/
+!i18n/
+
