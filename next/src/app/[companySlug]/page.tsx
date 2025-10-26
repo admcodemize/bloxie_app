@@ -1,7 +1,7 @@
-import { api } from '@/../convex/_generated/api';
 import BookingCalendar from '@/components/booking/BookingCalendar';
 import CompanyHeader from '@/components/booking/CompanyHeader';
 import { convex } from '@/lib/convex';
+import { api } from '@convex/_generated/api';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import styles from './page.module.css';
